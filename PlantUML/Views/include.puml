@@ -1,0 +1,4 @@
+@startuml
+!include ./MainWindow.axaml.puml
+!include ./MainView.axaml.puml
+@enduml

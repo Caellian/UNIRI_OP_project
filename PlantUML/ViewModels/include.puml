@@ -1,0 +1,4 @@
+@startuml
+!include ./MainViewModel.puml
+!include ./ViewModelBase.puml
+@enduml

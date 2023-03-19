@@ -1,0 +1,5 @@
+@startuml
+class ViewModelBase {
+}
+ReactiveObject <|-- ViewModelBase
+@enduml
