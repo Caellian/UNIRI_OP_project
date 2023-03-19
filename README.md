@@ -1,5 +1,7 @@
 # Wordel
 
+Dokumentacija: ([pdf](https://github.com/Caellian/UNIRI_OP_project/raw/main/tin_svagelj.pdf)|[docx](https://github.com/Caellian/UNIRI_OP_project/raw/main/tin_svagelj.docx)|[md](https://github.com/Caellian/UNIRI_OP_project/raw/main/README.md))
+
 Cilj ovog rada je bio napraviti repliku web aplikacije [Wordle](https://www.nytimes.com/games/wordle/index.html) koju je napravio *The New York Times*.
 
 C# već sadrži [.NET Multi-platform App UI](https://dotnet.microsoft.com/en-us/apps/maui) (nadalje MAUI), no s obzirom da je za razvojno okruženje bio korišten _Linux_, MAUI nije bio dobar odabir.
@@ -33,7 +35,7 @@ C# za razliku od Kotlina (trenutno) nema [`object`](https://kotlinlang.org/docs/
 
 ## Izrada dijagrama
 
-Za izradu UML dijagrama je bio korišten [PlantUmlClassDiagramGenerator (autor: Hirotada Kobayashi)](https://github.com/pierre3/PlantUmlClassDiagramGenerator), [PlantUML](https://staruml.io/) [C# import](https://github.com/staruml/staruml-csharp) i [Umbrello](https://apps.kde.org/umbrello/) nisu radili.
+Za izradu UML dijagrama klasa je bio korišten [PlantUmlClassDiagramGenerator (autor: Hirotada Kobayashi)](https://github.com/pierre3/PlantUmlClassDiagramGenerator); [PlantUML](https://staruml.io/) [C# import](https://github.com/staruml/staruml-csharp) i [Umbrello](https://apps.kde.org/umbrello/) nisu radili.
 
 ## UML dijagram klasa aplikacije
 
