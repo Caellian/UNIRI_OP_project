@@ -1,20 +1,17 @@
 using System;
 
-namespace Wordel.Model.Game;
+namespace Wordel.Model;
 
 public class GameState
 {
-    public static int WordLength = 5;
-    public static int MaxAnswers = 5;
-    
     public readonly string CorrectAnswer;
-    public string?[] Answers = new string[MaxAnswers]; 
+    public string[] Answers = new string[1];
     
     private readonly Random _random = new();
     
-    public GameState()
+    public GameState(int wordLength)
     {
-        var wl = WordList.GetSized(WordLength);
+        var wl = WordList.GetSized(wordLength);
         CorrectAnswer = wl[_random.Next() % wl.Length];
     }
 }

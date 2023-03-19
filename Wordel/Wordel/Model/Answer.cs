@@ -1,4 +1,4 @@
-namespace Wordel.Model.Game;
+namespace Wordel.Model;
 
 public record struct Answer(string Value)
 {

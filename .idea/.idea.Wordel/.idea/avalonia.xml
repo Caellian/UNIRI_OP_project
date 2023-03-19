@@ -4,8 +4,12 @@
     <option name="projectPerEditor">
       <map>
         <entry key="Wordel/Wordel/App.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+        <entry key="Wordel/Wordel/Assets/backspace.xaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+        <entry key="Wordel/Wordel/Assets/cog.xaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+        <entry key="Wordel/Wordel/Assets/refresh.xaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Components/LetterSpace.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Views/MainView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+        <entry key="Wordel/Wordel/Views/MainWindow.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
       </map>
     </option>
   </component>

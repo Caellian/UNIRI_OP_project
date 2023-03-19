@@ -4,16 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Wordel.ViewModels"
              xmlns:components="clr-namespace:Wordel.Components"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
              x:Class="Wordel.Views.MainView"
              Foreground="White"
-             Background="#171C2C">
+             Background="#222">
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <viewModels:MainViewModel />
+    <viewModels:GameViewModel />
   </Design.DataContext>
-
-    <components:LetterDisplay />
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <StackPanel>
+        <Grid Height="40" ColumnDefinitions="Auto, *, Auto">
+            <Image Grid.Column="0" Margin="5" Source="/Assets/new.png"/>
+            <TextPresenter Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" FontWeight="ExtraBold" FontSize="25">WORDEL</TextPresenter>
+            <Image Grid.Column="2" Margin="5" Source="/Assets/cog.png"/>
+        </Grid>
+        <Grid Name="WordGrid">
+        
+        </Grid>
+    </StackPanel>
 </UserControl>

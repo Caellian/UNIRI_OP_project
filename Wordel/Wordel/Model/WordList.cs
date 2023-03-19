@@ -5,7 +5,7 @@ using Avalonia;
 using Avalonia.Platform;
 using Newtonsoft.Json;
 
-namespace Wordel.Model.Game;
+namespace Wordel.Model;
 
 public static class WordList
 {

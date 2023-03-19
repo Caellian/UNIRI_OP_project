@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Wordel.Model.Game;
+namespace Wordel.Model;
 
 public record struct AnswerLetter(char Value)
 {

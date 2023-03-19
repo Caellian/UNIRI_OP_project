@@ -1,4 +1,4 @@
-namespace Wordel.Model.Game;
+namespace Wordel.Model;
 
 public enum LetterUse
 {
