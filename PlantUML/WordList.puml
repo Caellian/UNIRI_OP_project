@@ -1,0 +1,9 @@
+@startuml
+class WordList <<static>> {
+    - {static} _words : string[]? = null
+    + {static} Get() : string[]
+    + {static} GetSized(size:int) : string[]
+    + {static} Count() : int
+    + {static} CountSized(size:int) : int
+}
+@enduml

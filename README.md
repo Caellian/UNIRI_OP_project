@@ -26,10 +26,18 @@ Uporaba `IAssetLoader#Open` u mojoj aplikaciji nije značajna, no za naprednije 
 S obzirom da je rječnik statičan u kontekstu izvođenja aplikacije, koristio sam statičnu klasu (`Wordel.Model.Game.WordList`) sa statičnim članom tipa `string[]?` za pohranu liste riječi koji je inicijalno postavljen na `null` te mu se nakon prvog pristupa učitavaju vrijenosti iz resursa `dictionary.json` priloženog uz aplikaciju.
 
 U klasničnoj primjeni [GoF "singleton" obrasca stvaranja](https://refactoring.guru/design-patterns/singleton) bi klasa imala funkciju za pristup jedinstveno instanciranoj statičnoj instanci (ili objektu) klase, no s obzirom na jednokranu svrhu klase `WordList` (za pohranu `string[]`) sam odlučio učiniti sam član statičnim. Tako je dobivena funkcionalnost sličnija Rustovoj [std::sync::Once](https://doc.rust-lang.org/std/sync/struct.Once.html) strukturi.
-`static` tip klase implicira da je `WordList` također i `sealed` (hrv. zapečaćena) klasa, tj. da nije dozvoljeno njeno daljnje proširivanje.
+`static` tip klase uključuje da je `WordList` također i `sealed` (hrv. zapečaćena) klasa, tj. da nije dozvoljeno njeno daljnje proširivanje.
 C# za razliku od Kotlina (trenutno) nema [`object`](https://kotlinlang.org/docs/object-declarations.html#object-declarations-overview) ključnu riječ za automatsko generiranje bajtkoda (engl. bytecode) koji provodi identičnu logiku opisanu GoF obrascem.
 
 ![Struktura jedinstveno instancirane klase](https://refactoring.guru/images/patterns/diagrams/singleton/structure-en.png)
+
+## Izrada dijagrama
+
+Za izradu UML dijagrama je bio korišten [PlantUmlClassDiagramGenerator (autor: Hirotada Kobayashi)](https://github.com/pierre3/PlantUmlClassDiagramGenerator), [PlantUML](https://staruml.io/) [C# import](https://github.com/staruml/staruml-csharp) i [Umbrello](https://apps.kde.org/umbrello/) nisu radili.
+
+## UML dijagram modela aplikacije
+
+![Dijagram aplikacije](PlantUML/include.svg)
 
 ## Zaključci
 

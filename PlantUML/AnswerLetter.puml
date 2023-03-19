@@ -1,0 +1,6 @@
+@startuml
+class AnswerLetter <<record>> <<struct>> {
+    + Value : char <<get>> <<init>>
+    + UseColor(state:GameState, position:int) : LetterUse
+}
+@enduml

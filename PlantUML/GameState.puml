@@ -1,0 +1,9 @@
+@startuml
+class GameState {
+    + {static} WordLength : int = 5
+    + {static} MaxAnswers : int = 5
+    + <<readonly>> CorrectAnswer : string
+    + GameState()
+}
+GameState o-> "_random" Random
+@enduml

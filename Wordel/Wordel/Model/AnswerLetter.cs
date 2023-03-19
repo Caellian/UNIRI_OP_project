@@ -10,7 +10,8 @@ public record struct AnswerLetter(char Value)
         {
             return LetterUse.Currect;
         }
-        if (state.CorrectAnswer.Any(c => c == this.Value))
+        var self = this;
+        if (state.CorrectAnswer.Any(c => c == self.Value))
         {
             return LetterUse.Possible;
         }

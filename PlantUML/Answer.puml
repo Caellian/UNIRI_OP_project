@@ -1,0 +1,7 @@
+@startuml
+class Answer <<record>> <<struct>> {
+    + Value : string <<get>> <<init>>
+    + Letter(index:int) : AnswerLetter?
+    + GetLetterUse(state:GameState, index:int) : LetterUse?
+}
+@enduml
