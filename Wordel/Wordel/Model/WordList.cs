@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 
 namespace Wordel.Model.Game;
 
-
 public static class WordList
 {
     private static string[]? _words = null;
@@ -15,6 +14,9 @@ public static class WordList
     public static string[] Get()
     {
         if (_words != null) return _words;
+        
+        // Ovdje bi išla ograda (engl. fence) za provjeru je li Get već pozvan
+        // u slučaju višenitnog pristupa
 
         var assets = AvaloniaLocator.Current.GetService<IAssetLoader>()!;
         Stream stream = assets.Open(new Uri("avares://Wordel/Assets/dictionary.json"));
