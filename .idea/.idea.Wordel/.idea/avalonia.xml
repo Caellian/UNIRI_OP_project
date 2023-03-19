@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Wordel/Wordel/App.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+        <entry key="Wordel/Wordel/Components/LetterSpace.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+        <entry key="Wordel/Wordel/Views/MainView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
