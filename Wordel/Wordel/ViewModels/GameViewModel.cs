@@ -13,7 +13,18 @@ public class GameViewModel : ViewModelBase
     public static int DefaultWordLength = 5;
     public static int DefaultMaxAnswers = 5;
 
-    private GameState _state = new(new Limits(DefaultWordLength, DefaultMaxAnswers));
+    private GameState _state;
+
+    public GameViewModel()
+    {
+        _state = new GameState(new Limits(5, 5));
+    }
+
+    public GameViewModel(Limits limits)
+    {
+        _state = new GameState(limits);
+    }
+    
     public GameState State
     {
         get => _state;

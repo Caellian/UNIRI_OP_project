@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Wordel.Model;
 using Wordel.ViewModels;
 using Wordel.Views;
 
@@ -19,14 +20,14 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new GameViewModel()
+                DataContext = new MainWindowViewModel(new Limits(5, 5))
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView
+            singleViewPlatform.MainView = new GameView
             {
-                DataContext = new GameViewModel()
+                DataContext = new MainWindowViewModel(new Limits(5, 5))
             };
         }
 

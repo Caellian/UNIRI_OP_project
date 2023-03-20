@@ -4,10 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:Wordel.ViewModels"
              xmlns:components="clr-namespace:Wordel.Components"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="500"
-             x:Class="Wordel.Views.MainView"
-             Foreground="White"
-             Background="#222">
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
+             x:Class="Wordel.Views.GameView">
   <Design.DataContext>
     <!-- This only sets the DataContext for the previewer in an IDE,
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -15,9 +13,9 @@
   </Design.DataContext>
     <StackPanel Spacing="10">
         <Grid Height="50" ColumnDefinitions="Auto, *, Auto">
-            <Image Grid.Column="0" Margin="5" Source="/Assets/new.png"/>
+            <Image Grid.Column="0" Margin="5" PointerReleased="NewGame_OnPointerReleased" Source="/Assets/new.png"/>
             <TextPresenter Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" FontWeight="ExtraBold" FontSize="30">WORDEL</TextPresenter>
-            <Image Grid.Column="2" Margin="5" Source="/Assets/cog.png"/>
+            <Image Grid.Column="2" Margin="5" PointerReleased="Settings_OnPointerReleased" Source="/Assets/cog.png"/>
         </Grid>
         <ItemsRepeater Items="{Binding Answers}">
             <ItemsRepeater.Layout>
@@ -25,7 +23,7 @@
             </ItemsRepeater.Layout>
             <ItemsRepeater.ItemTemplate>
                 <DataTemplate>
-                    <components:AnswerField CurrentAnswer="{Binding}"></components:AnswerField>
+                    <components:AnswerField></components:AnswerField>
                 </DataTemplate>
             </ItemsRepeater.ItemTemplate>
         </ItemsRepeater>
