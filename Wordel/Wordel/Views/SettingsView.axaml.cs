@@ -28,12 +28,12 @@ public partial class SettingsView : UserControl
     private void WordLength_OnValueChanged(object? sender, NumericUpDownValueChangedEventArgs e)
     {
         var settings = (DataContext as SettingsViewModel);
-        settings.Limits = settings.Limits with { WordLength = (int) e.NewValue };
+        settings.Settings = settings.Settings with { WordLength = (int) e.NewValue };
     }
 
     private void MaxAnswers_OnValueChanged(object? sender, NumericUpDownValueChangedEventArgs e)
     {
         var settings = (DataContext as SettingsViewModel);
-        settings.Limits = settings.Limits with { MaxAnswers = (int) e.NewValue };
+        settings.Settings = settings.Settings with { MaxAnswers = (int) e.NewValue };
     }
 }

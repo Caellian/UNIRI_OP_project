@@ -8,11 +8,9 @@
              d:DesignHeight="600"
              x:Class="Wordel.Views.SettingsView">
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <viewModels:SettingsViewModel/>
     </Design.DataContext>
-    <StackPanel Spacing="10">
+    <StackPanel Spacing="15">
         <Grid Height="50" ColumnDefinitions="*, Auto">
             <TextPresenter Grid.Column="0" 
                            Margin="5,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontWeight="ExtraBold" FontSize="25">Settings</TextPresenter>
@@ -20,10 +18,10 @@
         </Grid>
         <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
             <TextPresenter Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="18">Word Length:</TextPresenter>
-            <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0,0,10,0" Value="{Binding Path=Limits.WordLength, Mode=OneTime}" ValueChanged="WordLength_OnValueChanged" Width="150" Increment="1" Minimum="4" Maximum="10"/>
+            <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0,0,10,0" Value="{Binding Path=Settings.WordLength, Mode=OneTime}" ValueChanged="WordLength_OnValueChanged" Width="150" Increment="1" Minimum="4" Maximum="10"/>
             
             <TextPresenter Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="18">Max Answers:</TextPresenter>
-            <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Value="{Binding Path=Limits.MaxAnswers, Mode=OneTime}" ValueChanged="MaxAnswers_OnValueChanged" Width="150" Increment="1" Minimum="3" Maximum="10"/>
+            <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Value="{Binding Path=Settings.MaxAnswers, Mode=OneTime}" ValueChanged="MaxAnswers_OnValueChanged" Width="150" Increment="1" Minimum="3" Maximum="10"/>
         </Grid>
     </StackPanel>
 </UserControl>

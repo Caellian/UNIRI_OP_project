@@ -10,19 +10,16 @@ namespace Wordel.ViewModels;
 
 public class GameViewModel : ViewModelBase
 {
-    public static int DefaultWordLength = 5;
-    public static int DefaultMaxAnswers = 5;
-
     private GameState _state;
 
     public GameViewModel()
     {
-        _state = new GameState(new Limits(5, 5));
+        _state = new GameState(new Settings());
     }
 
-    public GameViewModel(Limits limits)
+    public GameViewModel(Settings settings)
     {
-        _state = new GameState(limits);
+        _state = new GameState(settings);
     }
     
     public GameState State
@@ -31,13 +28,31 @@ public class GameViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _state, value);
     }
 
-    public List<Answer> Answers => State.Answers;
-    public int CurrentTry => State.Answers.Count;
-    
-    public Answer CurrentAnswer => State.Answers[CurrentTry];
+    public string CurrentAnswer
+    {
+        get => State.Answers[State.CurrentTry].Value;
+        set => this.RaiseAndSetIfChanged(ref _state.Answers[_state.CurrentTry].Value, value);
+    }
 
     public void StartNewGame()
     {
-        this.RaiseAndSetIfChanged(ref _state, new GameState(_state.Limits));
+        this.RaiseAndSetIfChanged(ref _state, new GameState(_state.Settings));
+    }
+
+    public void EnterLetter(char letter)
+    {
+        if (CurrentAnswer.Length < State.Settings.WordLength)
+        {
+            CurrentAnswer += letter;
+        }
+    }
+
+    public void ConfirmAnswer()
+    {
+        if (State.Answers[State.CurrentTry].Value.Length == State.Settings.WordLength)
+        {
+            // TODO: Check if correct
+            State.CurrentTry += 1;
+        }
     }
 }

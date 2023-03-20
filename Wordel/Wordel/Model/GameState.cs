@@ -8,15 +8,23 @@ public class GameState
 {
     public readonly Answer CorrectAnswer;
     public List<Answer> Answers;
-    public Limits Limits;
+    public int CurrentTry;
+    
+    public Settings Settings;
     
     private readonly Random _random = new();
     
-    public GameState(Limits limits)
+    public GameState(Settings settings)
     {
-        this.Limits = limits;
-        var wl = WordList.GetSized(limits.WordLength);
+        this.Settings = settings;
+        var wl = WordList.GetSized(settings.WordLength);
         CorrectAnswer = new Answer(wl[_random.Next() % wl.Length]);
-        Answers = new List<Answer>(limits.MaxAnswers);
+        Answers = new List<Answer>(settings.MaxAnswers);
+        for (var i = 0; i < settings.MaxAnswers; i++)
+        {
+            Answers.Add(new Answer(""));
+        }
+
+        CurrentTry = 0;
     }
 }

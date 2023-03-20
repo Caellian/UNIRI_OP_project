@@ -1,0 +1,15 @@
+@startuml
+class GameViewModel {
+    + GameViewModel()
+    + GameViewModel(settings:Settings)
+    + CurrentTry : int <<get>>
+    + StartNewGame() : void
+}
+class "List`1"<T> {
+}
+ViewModelBase <|-- GameViewModel
+GameViewModel --> "_state" GameState
+GameViewModel --> "State" GameState
+GameViewModel --> "Answers<Answer>" "List`1"
+GameViewModel --> "CurrentAnswer" Answer
+@enduml

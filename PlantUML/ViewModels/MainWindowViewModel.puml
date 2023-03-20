@@ -1,0 +1,10 @@
+@startuml
+class MainWindowViewModel {
+    + MainWindowViewModel(settings:Settings)
+    + OpenSettings() : void
+    + CloseSettings() : void
+}
+ViewModelBase <|-- MainWindowViewModel
+MainWindowViewModel --> "_content" ViewModelBase
+MainWindowViewModel --> "Content" ViewModelBase
+@enduml

@@ -37,9 +37,8 @@ C# za razliku od Kotlina (trenutno) nema [`object`](https://kotlinlang.org/docs/
 
 Za izradu UML dijagrama klasa je bio korišten [PlantUmlClassDiagramGenerator (autor: Hirotada Kobayashi)](https://github.com/pierre3/PlantUmlClassDiagramGenerator); [PlantUML](https://staruml.io/) [C# import](https://github.com/staruml/staruml-csharp) i [Umbrello](https://apps.kde.org/umbrello/) nisu radili.
 
-## UML dijagram klasa aplikacije
-
-![UML Dijagram klasa aplikacije](PlantUML/Global.svg)
-
-## Zaključci
+![UML dijagram komponenta](PlantUML/Components/include.svg)
+![UML dijagram modela](PlantUML/Model/include.svg)
+![UML dijagram pogled-modela](PlantUML/ViewModels/include.svg)
+![UML dijagram pogleda](PlantUML/Views/include.svg)
 

@@ -21,3 +21,4 @@ Global=$(echo "$Global\n@enduml\n")
 echo -en "$Global" > ./PlantUML/Global.puml
 
 plantuml -tsvg ./PlantUML
+plantuml -tsvg ./PlantUML/*/include.puml

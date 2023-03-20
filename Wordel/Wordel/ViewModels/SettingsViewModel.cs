@@ -5,21 +5,21 @@ namespace Wordel.ViewModels;
 
 public class SettingsViewModel: ViewModelBase
 {
-    private Limits _limits;
+    private Settings _settings;
 
     public SettingsViewModel()
     {
-        _limits = new Limits(5, 5);
+        _settings = new Settings();
     }
     
-    public SettingsViewModel(Limits limits)
+    public SettingsViewModel(Settings settings)
     {
-        _limits = limits;
+        _settings = settings;
     }
     
-    public Limits Limits
+    public Settings Settings
     {
-        get => _limits;
-        set => this.RaiseAndSetIfChanged(ref _limits, value);
+        get => _settings;
+        set => this.RaiseAndSetIfChanged(ref _settings, value);
     }
 }

@@ -1,9 +1,0 @@
-@startuml
-class LetterDisplay {
-    + Letter : string = ""
-    + LetterDisplay()
-    + <<override>> Render(context:DrawingContext) : void
-}
-Control <|-- LetterDisplay
-LetterDisplay --> "_text" FormattedText
-@enduml

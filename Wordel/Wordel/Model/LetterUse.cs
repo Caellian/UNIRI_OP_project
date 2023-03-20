@@ -2,7 +2,8 @@ namespace Wordel.Model;
 
 public enum LetterUse
 {
-    Wrong = 0,
-    Possible = 1,
-    Currect = 2,
+    Unknown = 0,
+    Wrong = 1,
+    Possible = 2,
+    Currect = 3,
 }

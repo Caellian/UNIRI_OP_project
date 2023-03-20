@@ -1,0 +1,7 @@
+@startuml
+class AnswerView <<partial>> {
+    + AnswerView()
+    - InitializeComponent() : void
+}
+UserControl <|-- AnswerView
+@enduml

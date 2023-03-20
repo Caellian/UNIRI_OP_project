@@ -1,6 +1,0 @@
-@startuml
-class MainView <<partial>> {
-    + MainView()
-}
-UserControl <|-- MainView
-@enduml

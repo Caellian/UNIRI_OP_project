@@ -4,7 +4,10 @@ namespace Wordel.Model;
 
 public class Answer
 {
-    public string Value { get; set; }
+    public string Value;
+    private bool _locked;
+
+    public bool Locked { get => _locked; set => _locked = value; }
 
     public Answer(string value)
     {
@@ -19,6 +22,13 @@ public class Answer
 
     public LetterUse? GetLetterUse(GameState state, int index)
     {
-        return Letter(index)?.UseColor(state, index);
+        if (Locked)
+        {
+            return Letter(index)?.UseColor(state, index);
+        }
+        else
+        {
+            return LetterUse.Unknown;
+        }
     }
 }

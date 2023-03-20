@@ -1,7 +1,0 @@
-@startuml
-class MainViewModel {
-    + Greeting : string <<get>>
-}
-ViewModelBase <|-- MainViewModel
-MainViewModel o-> "State" GameState
-@enduml

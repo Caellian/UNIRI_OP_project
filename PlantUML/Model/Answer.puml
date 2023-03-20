@@ -1,6 +1,10 @@
 @startuml
-class Answer <<record>> <<struct>> {
-    + Value : string <<get>> <<init>>
+class Answer {
+    - _value : string
+    - _locked : bool
+    + Value : string <<get>> <<set>>
+    + Locked : bool <<get>> <<set>>
+    + Answer(value:string)
     + Letter(index:int) : AnswerLetter?
     + GetLetterUse(state:GameState, index:int) : LetterUse?
 }

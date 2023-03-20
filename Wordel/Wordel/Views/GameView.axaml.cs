@@ -1,6 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.Controls;
+using Avalonia.Data;
 using Avalonia.Input;
+using ReactiveUI;
+using Wordel.Components;
 using Wordel.ViewModels;
 
 namespace Wordel.Views;
@@ -12,9 +16,30 @@ public partial class GameView : UserControl
         InitializeComponent();
     }
 
-    protected override void OnKeyUp(KeyEventArgs e)
+    private void RebuildLetterGrid()
     {
-        base.OnKeyUp(e);
+        var state = (DataContext as GameViewModel)?.State;
+
+        AnswerStackPanel.Children.Clear();
+        for (var i = 0; i < state.Settings.MaxAnswers; i++)
+        {
+            var af = new AnswerField();
+            af.CurrentAnswer = state.Answers[i].Value;
+            af.MaxLength = state.Settings.WordLength;
+            af.Width = af.ContentWidth; // TODO(tin): Setting AnswerField width manually
+            
+            AnswerStackPanel.Children.Add(af);
+        }
+    }
+    
+    protected override void OnLoaded()
+    {
+        var ctx = (DataContext as GameViewModel);
+        ctx.Changed.Subscribe(delegate(IReactivePropertyChangedEventArgs<IReactiveObject> args)
+        {
+            RebuildLetterGrid();
+        });
+        RebuildLetterGrid();
     }
 
     private void NewGame_OnPointerReleased(object? sender, PointerReleasedEventArgs e)

@@ -8,9 +8,9 @@ public class MainWindowViewModel: ViewModelBase
 {
     private ViewModelBase _content;
 
-    public MainWindowViewModel(Limits limits)
+    public MainWindowViewModel(Settings settings)
     {
-        Content = new GameViewModel(limits);
+        Content = new GameViewModel(settings);
     }
 
     public ViewModelBase Content
@@ -21,13 +21,13 @@ public class MainWindowViewModel: ViewModelBase
 
     public void OpenSettings()
     {
-        var limits = (Content as GameViewModel)!.State.Limits;
+        var limits = (Content as GameViewModel)!.State.Settings;
         Content = new SettingsViewModel(limits);
     }
     
     public void CloseSettings()
     {
-        var limits = (Content as SettingsViewModel)!.Limits;
+        var limits = (Content as SettingsViewModel)!.Settings;
         Content = new GameViewModel(limits);
     }
 }

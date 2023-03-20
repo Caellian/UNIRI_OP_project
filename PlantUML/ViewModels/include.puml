@@ -1,4 +1,7 @@
 @startuml
-!include ./MainViewModel.puml
+!include ./AnswerViewModel.puml
+!include ./MainWindowViewModel.puml
+!include ./SettingsViewModel.puml
+!include ./GameViewModel.puml
 !include ./ViewModelBase.puml
 @enduml

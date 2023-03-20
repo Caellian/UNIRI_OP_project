@@ -1,4 +1,3 @@
 @startuml
-!include ./LetterDisplay.puml
-!include ./FilledLetterDisplay.puml
+!include ./AnswerField.axaml.puml
 @enduml

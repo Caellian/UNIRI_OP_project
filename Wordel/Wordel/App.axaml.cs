@@ -20,14 +20,14 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainWindowViewModel(new Limits(5, 5))
+                DataContext = new MainWindowViewModel(new Settings())
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
             singleViewPlatform.MainView = new GameView
             {
-                DataContext = new MainWindowViewModel(new Limits(5, 5))
+                DataContext = new MainWindowViewModel(new Settings())
             };
         }
 

@@ -1,5 +1,0 @@
-@startuml
-class FilledLetterDisplay {
-}
-LetterDisplay <|-- FilledLetterDisplay
-@enduml
