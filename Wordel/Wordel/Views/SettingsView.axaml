@@ -17,10 +17,10 @@
             <Image Grid.Column="1" Margin="5" PointerReleased="Close_OnPointerReleased" Source="/Assets/close.png"/>
         </Grid>
         <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
-            <TextPresenter Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="18">Word Length:</TextPresenter>
+            <TextPresenter Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="18">Duljina riječi:</TextPresenter>
             <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0,0,10,0" Value="{Binding Path=Settings.WordLength, Mode=OneTime}" ValueChanged="WordLength_OnValueChanged" Width="150" Increment="1" Minimum="4" Maximum="10"/>
             
-            <TextPresenter Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="18">Max Answers:</TextPresenter>
+            <TextPresenter Grid.Row="1" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="18">Broj pokušaja:</TextPresenter>
             <NumericUpDown Grid.Row="1" Grid.Column="1" Margin="0,0,10,0" Value="{Binding Path=Settings.MaxAnswers, Mode=OneTime}" ValueChanged="MaxAnswers_OnValueChanged" Width="150" Increment="1" Minimum="3" Maximum="10"/>
         </Grid>
     </StackPanel>

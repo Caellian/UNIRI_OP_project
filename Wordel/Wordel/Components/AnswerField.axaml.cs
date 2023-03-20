@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
@@ -73,6 +74,20 @@ public partial class AnswerField : UserControl
         set => SetAndRaise(CurrentAnswerProperty, ref _currentAnswer, value);
     }
 
+    public static readonly DirectProperty<AnswerField, string?> CorrectAnswerProperty =
+        AvaloniaProperty.RegisterDirect<AnswerField, string?>(
+            nameof(CorrectAnswer),
+            o => o.CorrectAnswer,
+            (o, v) => o.CorrectAnswer = v);
+
+    private string? _correctAnswer;
+
+    public string? CorrectAnswer
+    {
+        get => _correctAnswer;
+        set => SetAndRaise(CorrectAnswerProperty, ref _correctAnswer, value);
+    }
+
     public double ContentWidth => MaxLength * (CellWidth + BorderThickness) + (MaxLength - 1) * CellSpacing;
     public double ContentHeight => CellHeight + BorderThickness * 2.0;
 
@@ -86,13 +101,30 @@ public partial class AnswerField : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
+    public ISolidColorBrush UseColor(int position)
+    {
+        if (CorrectAnswer == null || CurrentAnswer.Length <= position) return Brushes.Transparent;
+        
+        if (CorrectAnswer[position] == CurrentAnswer[position])
+        {
+            return Brushes.DarkGreen;
+        }
+        if (CorrectAnswer.ToCharArray().Any(c => c == CurrentAnswer[position]))
+        {
+            return Brushes.DarkBlue;
+        }
+
+        return Brushes.DarkRed;
+    }
+
     public override void Render(DrawingContext context)
     {
         for (var i = 0; i < MaxLength; i++)
         {
             var pos = new Point(BorderThickness + i * (CellWidth + CellSpacing), BorderThickness);
 
-            context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Gray, BorderThickness),
+            var fill = UseColor(i);
+            context.DrawRectangle(fill, new Pen(Brushes.Gray, BorderThickness),
                 new Rect(pos, new Size(CellWidth, CellHeight)), 4, 4);
 
             if (i >= _currentAnswer.Length) continue;

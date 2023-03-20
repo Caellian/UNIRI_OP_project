@@ -20,6 +20,10 @@ public partial class MainWindow : Window
             {
                 model.ConfirmAnswer();
             }
+            else if (e.Key == Key.Back)
+            {
+                model.RemoveLetter();
+            }
             else
             {
                 var entered = e.Key.ToString();
