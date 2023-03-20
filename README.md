@@ -3,7 +3,9 @@
 ![Prikaz aplikacije](img/preview.png)
 
 GitHub: [Caellian/UNIRI_OP_project](https://github.com/Caellian/UNIRI_OP_project)
+
 Dokumentacija: ([pdf](https://github.com/Caellian/UNIRI_OP_project/raw/main/tin_svagelj.pdf)|[docx](https://github.com/Caellian/UNIRI_OP_project/raw/main/tin_svagelj.docx)|[md](https://github.com/Caellian/UNIRI_OP_project/raw/main/README.md))
+
 
 Cilj ovog rada je bio napraviti repliku web aplikacije [Wordle](https://www.nytimes.com/games/wordle/index.html) koju je napravio *The New York Times*.
 
