@@ -1,7 +1,16 @@
+using System.Collections.Generic;
+
 namespace Wordel.Model;
 
-public record struct Answer(string Value)
+public class Answer
 {
+    public string Value { get; set; }
+
+    public Answer(string value)
+    {
+        Value = value;
+    }
+    
     public AnswerLetter? Letter(int index)
     {
         if (index >= Value.Length) return null;

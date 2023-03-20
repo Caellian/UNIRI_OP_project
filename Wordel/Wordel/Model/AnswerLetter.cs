@@ -6,12 +6,12 @@ public record struct AnswerLetter(char Value)
 {
     public LetterUse UseColor(GameState state, int position)
     {
-        if (state.CorrectAnswer[position] == Value)
+        if (state.CorrectAnswer.Value[position] == Value)
         {
             return LetterUse.Currect;
         }
         var self = this;
-        if (state.CorrectAnswer.Any(c => c == self.Value))
+        if (state.CorrectAnswer.Value.Any(c => c == self.Value))
         {
             return LetterUse.Possible;
         }

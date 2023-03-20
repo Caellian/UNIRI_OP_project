@@ -13,14 +13,21 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <viewModels:GameViewModel />
   </Design.DataContext>
-    <StackPanel>
-        <Grid Height="40" ColumnDefinitions="Auto, *, Auto">
+    <StackPanel Spacing="10">
+        <Grid Height="50" ColumnDefinitions="Auto, *, Auto">
             <Image Grid.Column="0" Margin="5" Source="/Assets/new.png"/>
-            <TextPresenter Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" FontWeight="ExtraBold" FontSize="25">WORDEL</TextPresenter>
+            <TextPresenter Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" FontWeight="ExtraBold" FontSize="30">WORDEL</TextPresenter>
             <Image Grid.Column="2" Margin="5" Source="/Assets/cog.png"/>
         </Grid>
-        <Grid Name="WordGrid">
-        
-        </Grid>
+        <ItemsRepeater Items="{Binding Answers}">
+            <ItemsRepeater.Layout>
+                <StackLayout Spacing="5"/>
+            </ItemsRepeater.Layout>
+            <ItemsRepeater.ItemTemplate>
+                <DataTemplate>
+                    <components:AnswerField CurrentAnswer="{Binding}"></components:AnswerField>
+                </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
     </StackPanel>
 </UserControl>

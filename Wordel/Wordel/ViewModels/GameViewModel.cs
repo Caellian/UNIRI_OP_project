@@ -1,5 +1,9 @@
-﻿using Avalonia.Controls;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Avalonia.Controls;
+using Avalonia.Layout;
 using ReactiveUI;
+using Wordel.Components;
 using Wordel.Model;
 
 namespace Wordel.ViewModels;
@@ -8,27 +12,21 @@ public class GameViewModel : ViewModelBase
 {
     public static int DefaultWordLength = 5;
     public static int DefaultMaxAnswers = 5;
-    
-    private int _wordLenght = DefaultWordLength;
-    public int WordLength
+
+    private GameState _state = new(new Limits(DefaultWordLength, DefaultMaxAnswers));
+    public GameState State
     {
-        get => _wordLenght;
-        set => this.RaiseAndSetIfChanged(ref _wordLenght, value);
+        get => _state;
+        set => this.RaiseAndSetIfChanged(ref _state, value);
     }
+
+    public List<Answer> Answers => State.Answers;
+    public int CurrentTry => State.Answers.Count;
     
-    private int _maxAnswers = DefaultMaxAnswers;
-    public int MaxAnswers
-    {
-        get => _maxAnswers;
-        set => this.RaiseAndSetIfChanged(ref _maxAnswers, value);
-    }
-    
-    private GameState _state = new(DefaultWordLength);
-    
-    public string Greeting => _state.CorrectAnswer;
+    public Answer CurrentAnswer => State.Answers[CurrentTry];
 
     public void StartNewGame()
     {
-        this.RaiseAndSetIfChanged(ref _state, new(WordLength));
+        this.RaiseAndSetIfChanged(ref _state, new GameState(_state.Limits));
     }
 }
