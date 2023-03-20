@@ -1,5 +1,6 @@
 @startuml
 class GameState {
+    + CurrentTry : int
     + GameState(settings:Settings)
 }
 class "List`1"<T> {

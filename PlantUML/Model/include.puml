@@ -3,6 +3,7 @@
 !include ./WordList.puml
 !include ./Answer.puml
 !include ./GameState.puml
+!include ./GameStatus.puml
 !include ./LetterUse.puml
 !include ./AnswerLetter.puml
 @enduml

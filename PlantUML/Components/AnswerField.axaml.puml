@@ -8,10 +8,13 @@ class AnswerField <<partial>> {
     + BorderThickness : double <<get>> <<set>>
     - _currentAnswer : string = ""
     + CurrentAnswer : string <<get>> <<set>>
+    - _correctAnswer : string?
+    + CorrectAnswer : string? <<get>> <<set>>
     + ContentWidth : double <<get>>
     + ContentHeight : double <<get>>
     + AnswerField()
     - InitializeComponent() : void
+    + UseColor(position:int) : ISolidColorBrush
     + <<override>> Render(context:DrawingContext) : void
 }
 class "DirectProperty`2"<T1,T2> {
@@ -25,4 +28,5 @@ AnswerField o-> "CellHeightProperty<double>" "StyledProperty`1"
 AnswerField o-> "CellSpacingProperty<double>" "StyledProperty`1"
 AnswerField o-> "BorderThicknessProperty<double>" "StyledProperty`1"
 AnswerField o-> "CurrentAnswerProperty<AnswerField,string>" "DirectProperty`2"
+AnswerField o-> "CorrectAnswerProperty<AnswerField,string?>" "DirectProperty`2"
 @enduml

@@ -1,5 +1,4 @@
 @startuml
-!include ./AnswerViewModel.puml
 !include ./MainWindowViewModel.puml
 !include ./SettingsViewModel.puml
 !include ./GameViewModel.puml

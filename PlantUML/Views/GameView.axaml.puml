@@ -1,12 +1,11 @@
 @startuml
 class GameView <<partial>> {
     + GameView()
-    # <<override>> OnKeyUp(e:KeyEventArgs) : void
+    - RebuildLetterGrid() : void
+    - ShowStatus() : void
+    # <<override>> OnLoaded() : void
     - NewGame_OnPointerReleased(sender:object?, e:PointerReleasedEventArgs) : void
     - Settings_OnPointerReleased(sender:object?, e:PointerReleasedEventArgs) : void
 }
-class "IEnumerable`1"<T> {
-}
 UserControl <|-- GameView
-GameView --> "AnswerModels<AnswerViewModel>" "IEnumerable`1"
 @enduml

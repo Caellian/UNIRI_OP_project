@@ -2,5 +2,4 @@
 !include ./SettingsView.axaml.puml
 !include ./GameView.axaml.puml
 !include ./MainWindowView.axaml.puml
-!include ./AnswerView.axaml.puml
 @enduml

@@ -1,8 +1,7 @@
 @startuml
 class Answer {
-    - _value : string
+    + Value : string
     - _locked : bool
-    + Value : string <<get>> <<set>>
     + Locked : bool <<get>> <<set>>
     + Answer(value:string)
     + Letter(index:int) : AnswerLetter?

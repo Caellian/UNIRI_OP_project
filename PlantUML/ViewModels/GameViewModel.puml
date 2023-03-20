@@ -2,14 +2,16 @@
 class GameViewModel {
     + GameViewModel()
     + GameViewModel(settings:Settings)
-    + CurrentTry : int <<get>>
+    + CurrentAnswer : string <<get>> <<set>>
+    + CurrentTry : int <<get>> <<set>>
     + StartNewGame() : void
-}
-class "List`1"<T> {
+    + EnterLetter(letter:char) : void
+    + RemoveLetter() : void
+    + ConfirmAnswer() : void
 }
 ViewModelBase <|-- GameViewModel
 GameViewModel --> "_state" GameState
+GameViewModel o-> "_status" GameStatus
 GameViewModel --> "State" GameState
-GameViewModel --> "Answers<Answer>" "List`1"
-GameViewModel --> "CurrentAnswer" Answer
+GameViewModel --> "Status" GameStatus
 @enduml
