@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using MessageBox.Avalonia.Enums;
 using ReactiveUI;
 using Wordel.Components;
 using Wordel.Model;
@@ -38,8 +39,12 @@ public class GameViewModel : ViewModelBase
 
     public string CurrentAnswer
     {
-        get => State.Answers[State.CurrentTry].Value;
-        set => this.RaiseAndSetIfChanged(ref _state.Answers[_state.CurrentTry].Value, value);
+        get => State.Answers[State.CurrentTry];
+        set
+        {
+            _state.Answers[_state.CurrentTry] = value;
+            this.RaisePropertyChanged();
+        }
     }
 
     public int CurrentTry
@@ -50,12 +55,13 @@ public class GameViewModel : ViewModelBase
 
     public void StartNewGame()
     {
-        State = new GameState(_state.Settings);
+        State.Reset();
+        this.RaisePropertyChanged(nameof(State));
     }
 
     public void EnterLetter(char letter)
     {
-        if (CurrentAnswer.Length < State.Settings.WordLength)
+        if (CurrentAnswer.Length < State.WordLength)
         {
             CurrentAnswer += letter;
         }
@@ -71,9 +77,18 @@ public class GameViewModel : ViewModelBase
 
     public void ConfirmAnswer()
     {
-        if (State.Answers[State.CurrentTry].Value.Length == State.Settings.WordLength)
+        var current = State.Answers[State.CurrentTry];
+        if (current.Length == State.WordLength)
         {
-            if (State.Answers[State.CurrentTry] == State.CorrectAnswer)
+            if (!WordList.TestWord(current))
+            {
+                var dialog = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxStandardWindow("Nepoznata riječ",
+                    "Unesena riječ se ne nalazi u rječniku.", icon: Icon.Warning);
+                dialog.Show();
+                return;
+            }
+            
+            if (current == State.CorrectAnswer)
             {
                 Status = GameStatus.Win;
                 return;
@@ -81,7 +96,7 @@ public class GameViewModel : ViewModelBase
             
             CurrentTry += 1;
 
-            if (State.CurrentTry == State.Settings.MaxAnswers)
+            if (State.CurrentTry == State.MaxAnswers)
             {
                 Status = GameStatus.Lose;
             }

@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Wordel.Model;
 
 namespace Wordel.Components;
 
@@ -74,15 +75,15 @@ public partial class AnswerField : UserControl
         set => SetAndRaise(CurrentAnswerProperty, ref _currentAnswer, value);
     }
 
-    public static readonly DirectProperty<AnswerField, string?> CorrectAnswerProperty =
-        AvaloniaProperty.RegisterDirect<AnswerField, string?>(
+    public static readonly DirectProperty<AnswerField, string> CorrectAnswerProperty =
+        AvaloniaProperty.RegisterDirect<AnswerField, string>(
             nameof(CorrectAnswer),
             o => o.CorrectAnswer,
             (o, v) => o.CorrectAnswer = v);
 
-    private string? _correctAnswer;
+    private string _correctAnswer = "";
 
-    public string? CorrectAnswer
+    public string CorrectAnswer
     {
         get => _correctAnswer;
         set => SetAndRaise(CorrectAnswerProperty, ref _correctAnswer, value);
@@ -101,30 +102,31 @@ public partial class AnswerField : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
-    public ISolidColorBrush UseColor(int position)
+    public ISolidColorBrush[] UseColors(LetterUse[] uses)
     {
-        if (CorrectAnswer == null || CurrentAnswer.Length <= position) return Brushes.Transparent;
-        
-        if (CorrectAnswer[position] == CurrentAnswer[position])
+        var result = new ISolidColorBrush[uses.Length];
+        for (var i = 0; i < uses.Length; i++)
         {
-            return Brushes.DarkGreen;
+            result[i] = uses[i] switch
+            {
+                LetterUse.Currect => Brushes.DarkGreen,
+                LetterUse.Possible => Brushes.DarkBlue,
+                LetterUse.Wrong => Brushes.DarkRed,
+                _ => Brushes.Transparent,
+            };
         }
-        if (CorrectAnswer.ToCharArray().Any(c => c == CurrentAnswer[position]))
-        {
-            return Brushes.DarkBlue;
-        }
-
-        return Brushes.DarkRed;
+        return result;
     }
 
     public override void Render(DrawingContext context)
     {
+        var fill = UseColors(WordList.LetterUseArray(_correctAnswer, _currentAnswer, MaxLength));
+        
         for (var i = 0; i < MaxLength; i++)
         {
             var pos = new Point(BorderThickness + i * (CellWidth + CellSpacing), BorderThickness);
-
-            var fill = UseColor(i);
-            context.DrawRectangle(fill, new Pen(Brushes.Gray, BorderThickness),
+            
+            context.DrawRectangle(fill[i], new Pen(Brushes.Gray, BorderThickness),
                 new Rect(pos, new Size(CellWidth, CellHeight)), 4, 4);
 
             if (i >= _currentAnswer.Length) continue;

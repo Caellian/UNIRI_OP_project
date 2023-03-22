@@ -6,23 +6,32 @@ namespace Wordel.Model;
 
 public class GameState
 {
-    public readonly Answer CorrectAnswer;
-    public List<Answer> Answers;
+    public string CorrectAnswer;
+    public List<string> Answers;
     public int CurrentTry;
-    
-    public Settings Settings;
-    
-    private readonly Random _random = new();
+
+    public int WordLength => CorrectAnswer.Length; 
+    public int MaxAnswers => Answers.Capacity; 
     
     public GameState(Settings settings)
     {
-        this.Settings = settings;
-        var wl = WordList.GetSized(settings.WordLength);
-        CorrectAnswer = new Answer(wl[_random.Next() % wl.Length]);
-        Answers = new List<Answer>(settings.MaxAnswers);
-        for (var i = 0; i < settings.MaxAnswers; i++)
+        CorrectAnswer = WordList.GetRandomSized(settings.WordLength);
+        Answers = new List<string>(settings.MaxAnswers);
+        for (var i = 0; i < Answers.Capacity; i++)
         {
-            Answers.Add(new Answer(""));
+            Answers.Add(new string(""));
+        }
+
+        CurrentTry = 0;
+    }
+
+    public void Reset()
+    {
+        CorrectAnswer = WordList.GetRandomSized(CorrectAnswer.Length);
+        Answers = new List<string>(Answers.Capacity);
+        for (var i = 0; i < Answers.Capacity; i++)
+        {
+            Answers.Add(new string(""));
         }
 
         CurrentTry = 0;

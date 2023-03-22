@@ -8,9 +8,9 @@ public class MainWindowViewModel: ViewModelBase
 {
     private ViewModelBase _content;
 
-    public MainWindowViewModel(Settings settings)
+    public MainWindowViewModel()
     {
-        Content = new GameViewModel(settings);
+        _content = new GameViewModel(new Settings());
     }
 
     public ViewModelBase Content
@@ -19,15 +19,16 @@ public class MainWindowViewModel: ViewModelBase
         private set => this.RaiseAndSetIfChanged(ref _content, value);
     }
 
-    public void OpenSettings()
+    public void ToggleSettings()
     {
-        var limits = (Content as GameViewModel)!.State.Settings;
-        Content = new SettingsViewModel(limits);
-    }
-    
-    public void CloseSettings()
-    {
-        var limits = (Content as SettingsViewModel)!.Settings;
-        Content = new GameViewModel(limits);
+        Content = Content switch
+        {
+            GameViewModel gameModel => new SettingsViewModel(new Settings
+            {
+                MaxAnswers = gameModel.State.MaxAnswers, WordLength = gameModel.State.WordLength
+            }),
+            SettingsViewModel settingsModel => new GameViewModel(settingsModel.Settings),
+            _ => Content
+        };
     }
 }

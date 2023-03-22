@@ -1,13 +1,10 @@
 using System;
-using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
-using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Layout;
 using Avalonia.Media;
-using DynamicData;
 using ReactiveUI;
 using Wordel.Components;
 using Wordel.Model;
@@ -27,15 +24,14 @@ public partial class GameView : UserControl
         var state = (DataContext as GameViewModel)?.State;
 
         AnswerStackPanel.Children.Clear();
-        for (var i = 0; i < state.Settings.MaxAnswers; i++)
+        for (var i = 0; i < state.MaxAnswers; i++)
         {
-            var af = new AnswerField();
-            af.CurrentAnswer = state.Answers[i].Value;
-            if (i < state.CurrentTry)
+            var af = new AnswerField
             {
-                af.CorrectAnswer = state.CorrectAnswer.Value;
-            }
-            af.MaxLength = state.Settings.WordLength;
+                CurrentAnswer = state.Answers[i],
+                CorrectAnswer = i < state.CurrentTry ? state.CorrectAnswer : "",
+                MaxLength = state.WordLength
+            };
             af.Width = af.ContentWidth; // TODO(tin): Setting AnswerField width manually
             
             AnswerStackPanel.Children.Add(af);
@@ -69,7 +65,7 @@ public partial class GameView : UserControl
                 
                 var correctDisplay = new TextPresenter
                 {
-                    Text = "Točan odgovor: '" + ctx.State.CorrectAnswer.Value + "'",
+                    Text = "Točan odgovor: '" + ctx.State.CorrectAnswer + "'",
                     HorizontalAlignment = HorizontalAlignment.Center,
                     FontSize = 18,
                 };
@@ -110,6 +106,6 @@ public partial class GameView : UserControl
     private void Settings_OnPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         var model = Parent?.DataContext as MainWindowViewModel;
-        model?.OpenSettings();
+        model?.ToggleSettings();
     }
 }
