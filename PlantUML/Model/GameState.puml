@@ -1,12 +1,13 @@
 @startuml
 class GameState {
+    + CorrectAnswer : string
     + CurrentTry : int
+    + WordLength : int <<get>>
+    + MaxAnswers : int <<get>>
     + GameState(settings:Settings)
+    + Reset() : void
 }
 class "List`1"<T> {
 }
-GameState --> "CorrectAnswer" Answer
-GameState --> "Answers<Answer>" "List`1"
-GameState --> "Settings" Settings
-GameState o-> "_random" Random
+GameState --> "Answers<string>" "List`1"
 @enduml

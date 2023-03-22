@@ -67,12 +67,9 @@ Prvi put sam se susreo s MVVM arhitekturom GUI aplikacija. U početku sam imao p
 ## Nedostaci aplikacije
 
 Trenutnoj implementaciji aplikacije nedostaje sljedeće:
-- Postojanje unesenih riječi nije provjereno u rječniku
-  - Zbog potencijalno nepotpune rječničke baze je to možda i prednost :)
-- Brojanje ponavljajućih slova nije implementirano
-  - Originalni wordle poboja ograničen broj slova odgovarajućim bojama čime naznačuje broj ponavljanja slova u točnoj riječi.
 - Dijakritički znakovi nisu podržani
   - Podrška za lokalizaciju kodova tipki je iznimno zahtjevna za implementirati, kao i provjera unesenih znakova, i rasporeda tipkovnice. Pogotovo na platformski agnostičan način. AUI nema to podržano.
+- Ne postoji praćenje uspješno i neuspješno završenih partija.
 
 ## Izrada dijagrama
 

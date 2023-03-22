@@ -1,8 +1,7 @@
 @startuml
 class MainWindowViewModel {
-    + MainWindowViewModel(settings:Settings)
-    + OpenSettings() : void
-    + CloseSettings() : void
+    + MainWindowViewModel()
+    + ToggleSettings() : void
 }
 ViewModelBase <|-- MainWindowViewModel
 MainWindowViewModel --> "_content" ViewModelBase

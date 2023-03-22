@@ -1,9 +1,6 @@
 @startuml
 class Settings <<record>> <<struct>> {
-    - _wordLength : int = 5
-    - _maxAnswers : int = 5
-    + WordLength : int <<get>> <<set>>
-    + MaxAnswers : int <<get>> <<set>>
-    + Settings()
+    + WordLength : int <<get>> <<set>> = 5
+    + MaxAnswers : int <<get>> <<set>> = 5
 }
 @enduml

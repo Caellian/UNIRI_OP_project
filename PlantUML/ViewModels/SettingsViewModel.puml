@@ -1,6 +1,5 @@
 @startuml
 class SettingsViewModel {
-    + SettingsViewModel()
     + SettingsViewModel(settings:Settings)
 }
 ViewModelBase <|-- SettingsViewModel

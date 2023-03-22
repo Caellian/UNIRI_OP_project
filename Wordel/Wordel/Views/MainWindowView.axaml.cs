@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Wordel.ViewModels;
@@ -14,23 +15,24 @@ public partial class MainWindow : Window
     protected override void OnKeyDown(KeyEventArgs e)
     {
         var content = (DataContext as MainWindowViewModel)?.Content;
-        if (content is GameViewModel model)
+        if (content is not GameViewModel model) return;
+        
+        switch (e.Key)
         {
-            if (e.Key == Key.Enter)
-            {
+            case Key.Enter:
                 model.ConfirmAnswer();
-            }
-            else if (e.Key == Key.Back)
-            {
+                break;
+            case Key.Back:
                 model.RemoveLetter();
-            }
-            else
+                break;
+            default:
             {
                 var entered = e.Key.ToString();
                 if (entered.Length == 1)
                 {
                     model.EnterLetter(entered.ToLower()[0]);
                 }
+                break;
             }
         }
     }
