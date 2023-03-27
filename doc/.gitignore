@@ -310,3 +310,6 @@ TSWLatexianTemp*
 
 # glossaries
 *.glstex
+
+# Generated files
+*.pdf
