@@ -6,6 +6,7 @@ using MessageBox.Avalonia.Enums;
 using ReactiveUI;
 using Wordel.Components;
 using Wordel.Model;
+using Wordel.Util;
 
 namespace Wordel.ViewModels;
 
@@ -80,17 +81,15 @@ public class GameViewModel : ViewModelBase
         var current = State.Answers[State.CurrentTry];
         if (current.Length == State.WordLength)
         {
-            if (!WordList.TestWord(current))
+            if (current == State.CorrectAnswer)
+            {
+                Status = GameStatus.Win;
+                return;
+            } else if (!LocaleStorage.CurrentLocale!.WordList.TestWord(current))
             {
                 var dialog = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxStandardWindow("Nepoznata riječ",
                     "Unesena riječ se ne nalazi u rječniku.", icon: Icon.Warning);
                 dialog.Show();
-                return;
-            }
-            
-            if (current == State.CorrectAnswer)
-            {
-                Status = GameStatus.Win;
                 return;
             }
             

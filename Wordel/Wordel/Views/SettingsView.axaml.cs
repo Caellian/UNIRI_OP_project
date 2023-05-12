@@ -17,6 +17,21 @@ public partial class SettingsView : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
+    private void BuildOptions()
+    {
+        var model = (DataContext as SettingsViewModel)!;
+        foreach (var (field, conf) in model.SettingFields)
+        {
+            
+        }
+    }
+
+    protected override void OnLoaded()
+    {
+        base.OnLoaded();
+        BuildOptions();
+    }
+
     private void Close_OnPointerReleased(object? sender, PointerReleasedEventArgs e)
     {
         var model = Parent?.DataContext as MainWindowViewModel;

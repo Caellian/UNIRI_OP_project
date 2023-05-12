@@ -1,0 +1,4 @@
+{
+  "upper": ["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM"],
+  "lower": ["qwertyuiop", "asdfghjkl", "zxcvbnm"]
+}

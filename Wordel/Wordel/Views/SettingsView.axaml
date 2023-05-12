@@ -16,7 +16,7 @@
                            Margin="5,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontWeight="ExtraBold" FontSize="25">Settings</TextPresenter>
             <Image Grid.Column="1" Margin="5" PointerReleased="Close_OnPointerReleased" Source="/Assets/close.png"/>
         </Grid>
-        <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+        <Grid Name="OptionsGrid" ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
             <TextPresenter Grid.Row="0" Grid.Column="0" Margin="10,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontSize="18">Duljina riječi:</TextPresenter>
             <NumericUpDown Grid.Row="0" Grid.Column="1" Margin="0,0,10,0" Width="150" Increment="1" Minimum="4" Maximum="10"
                            Value="{Binding Settings.WordLength, Mode=OneTime}" ValueChanged="WordLength_OnValueChanged" />

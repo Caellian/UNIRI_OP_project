@@ -79,6 +79,8 @@ public partial class GameView : UserControl
     
     protected override void OnLoaded()
     {
+        base.OnLoaded();
+        
         var ctx = (DataContext as GameViewModel);
         ctx?.Changed.Subscribe(delegate(IReactivePropertyChangedEventArgs<IReactiveObject> args)
         {

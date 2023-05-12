@@ -17,5 +17,7 @@
         </Grid>
         <StackPanel Name="AnswerStackPanel" Spacing="5">
         </StackPanel>
+        <StackPanel Name="KeyboardStackPanel" Spacing="5">
+        </StackPanel>
     </StackPanel>
 </UserControl>

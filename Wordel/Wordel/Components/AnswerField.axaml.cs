@@ -120,7 +120,7 @@ public partial class AnswerField : UserControl
 
     public override void Render(DrawingContext context)
     {
-        var fill = UseColors(WordList.LetterUseArray(_correctAnswer, _currentAnswer, MaxLength));
+        var fill = UseColors(WordUtil.MatchInput(_correctAnswer, _currentAnswer, MaxLength));
         
         for (var i = 0; i < MaxLength; i++)
         {

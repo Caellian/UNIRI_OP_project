@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Wordel.Model;
+using Wordel.Util;
 using Wordel.ViewModels;
 using Wordel.Views;
 
@@ -16,6 +17,8 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
+        LocaleStorage.CurrentCulture = LocaleStorage.SupportedCultures[0];
+        
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow

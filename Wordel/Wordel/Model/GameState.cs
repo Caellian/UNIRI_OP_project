@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Wordel.Util;
 
 namespace Wordel.Model;
 
@@ -9,13 +10,14 @@ public class GameState
     public string CorrectAnswer;
     public List<string> Answers;
     public int CurrentTry;
+    static Random _rand = new();
 
     public int WordLength => CorrectAnswer.Length; 
     public int MaxAnswers => Answers.Capacity; 
     
     public GameState(Settings settings)
     {
-        CorrectAnswer = WordList.GetRandomSized(settings.WordLength);
+        CorrectAnswer = RandomWord(settings.WordLength);
         Answers = new List<string>(settings.MaxAnswers);
         for (var i = 0; i < Answers.Capacity; i++)
         {
@@ -27,7 +29,7 @@ public class GameState
 
     public void Reset()
     {
-        CorrectAnswer = WordList.GetRandomSized(CorrectAnswer.Length);
+        CorrectAnswer = RandomWord(CorrectAnswer.Length);
         Answers = new List<string>(Answers.Capacity);
         for (var i = 0; i < Answers.Capacity; i++)
         {
@@ -35,5 +37,11 @@ public class GameState
         }
 
         CurrentTry = 0;
+    }
+
+    static string RandomWord(int length)
+    {
+        var words = LocaleStorage.CurrentLocale!.WordList.GetSized(length);
+        return words[_rand.Next(words.Length)];
     }
 }
