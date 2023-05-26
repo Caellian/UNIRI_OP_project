@@ -7,18 +7,18 @@ namespace Wordel.Model;
 
 public class GameState
 {
+    public Settings Settings;
     public string CorrectAnswer;
     public List<string> Answers;
     public int CurrentTry;
     static Random _rand = new();
 
-    public int WordLength => CorrectAnswer.Length; 
-    public int MaxAnswers => Answers.Capacity; 
-    
     public GameState(Settings settings)
     {
+        Settings = settings;
         CorrectAnswer = RandomWord(settings.WordLength);
         Answers = new List<string>(settings.MaxAnswers);
+        // TODO: Remove greedy answer init
         for (var i = 0; i < Answers.Capacity; i++)
         {
             Answers.Add(new string(""));

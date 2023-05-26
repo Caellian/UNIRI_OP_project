@@ -1,0 +1,13 @@
+@startuml
+class WordList <<static>> {
+    - {static} _words : List<string>?
+    + {static} Get() : IEnumerable<string>
+    + {static} GetSized(size:int) : IEnumerable<string>
+    + {static} GetRandomSized(size:int) : string
+    + {static} Count() : int
+    + {static} CountSized(size:int) : int
+    + {static} TestWord(word:string) : bool
+    + {static} LetterUseArray(target:string, current:string, maxLength:int) : LetterUse[]
+}
+WordList o-> "_random" Random
+@enduml

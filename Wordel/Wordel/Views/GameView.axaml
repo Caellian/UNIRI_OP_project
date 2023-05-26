@@ -9,15 +9,25 @@
   <Design.DataContext>
     <viewModels:GameViewModel />
   </Design.DataContext>
-    <StackPanel Spacing="15">
-        <Grid Height="50" ColumnDefinitions="Auto, *, Auto">
-            <Image Grid.Column="0" Margin="5" PointerReleased="NewGame_OnPointerReleased" Source="/Assets/new.png"/>
+    <Grid RowDefinitions="Auto,Auto,*,Auto">
+        <Grid Grid.Row="0" Height="50" ColumnDefinitions="*, *, *">
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Height="50">
+                <components:IconButton Icon="/Assets/icons/new.png" Click="NewGame_OnPointerReleased" />
+            </StackPanel>
             <TextPresenter Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" FontWeight="ExtraBold" FontSize="30">WORDEL</TextPresenter>
-            <Image Grid.Column="2" Margin="5" PointerReleased="Settings_OnPointerReleased" Source="/Assets/cog.png"/>
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Height="50">
+                <components:IconButton Icon="/Assets/icons/leaderboard.png" Click="Leaderboard_OnPointerReleased" />
+                <components:IconButton Icon="/Assets/icons/cog.png" Click="Settings_OnPointerReleased" />
+            </StackPanel>
         </Grid>
-        <StackPanel Name="AnswerStackPanel" Spacing="5">
+        
+        <StackPanel Grid.Row="1" x:Name="AnswerStackPanel" Spacing="5" Margin="0,10">
         </StackPanel>
-        <StackPanel Name="KeyboardStackPanel" Spacing="5">
+        
+        <StackPanel Grid.Row="2" x:Name="MessageStackPanel" Spacing="5">
         </StackPanel>
-    </StackPanel>
+        
+        <StackPanel Grid.Row="3" x:Name="KeyboardStackPanel" Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" Margin="0, 15">
+        </StackPanel>
+    </Grid>
 </UserControl>

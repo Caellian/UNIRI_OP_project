@@ -1,0 +1,8 @@
+@startuml
+class SettingsViewModel {
+    + SettingsViewModel(settings:Settings)
+}
+ViewModelBase <|-- SettingsViewModel
+SettingsViewModel --> "_settings" Settings
+SettingsViewModel --> "Settings" Settings
+@enduml

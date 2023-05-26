@@ -1,4 +1,10 @@
 {
-  "WordLength": "Word length",
-  "TryCount": "Try count"
+  "UnknownWord": "Unknown word",
+  "InputNotInDict": "Entered word is not in dictionary.",
+  "LanguageSettingsOption": "Language:",
+  "WordLengthSettingsOption": "Word length:",
+  "MaxAnswersSettingsOption": "No. of tries:",
+  "GameVictory": "Victory!",
+  "GameFail": "You lose!",
+  "CorrectAnswer": "Correct answer"
 }

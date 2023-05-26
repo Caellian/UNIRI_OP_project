@@ -1,0 +1,33 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:Wordel.Components">
+    <Design.PreviewWith>
+        <controls:IconButton />
+    </Design.PreviewWith>
+
+    <Style Selector="controls|IconButton">
+        <Setter Property="Icon" Value="/Assets/icons/new.png" />
+
+        <Setter Property="Template">
+            <ControlTemplate>
+                <Button Width="50" Height="50" x:Name="Button">
+                    <Image Width="35" Height="35" Source="{TemplateBinding Icon}" />
+                </Button>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+    
+    <Style Selector="controls|IconButton>Button">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="CornerRadius" Value="100000"/>
+    </Style>
+    <Style Selector="controls|IconButton>Button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource BackgroundHighlightBrush}"/>
+    </Style>
+    <Style Selector="controls|IconButton>Button:pressed">
+        <Setter Property="Background" Value="{DynamicResource BackgroundActiveBrush}"/>
+    </Style>
+</Styles>

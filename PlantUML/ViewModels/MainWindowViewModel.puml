@@ -1,9 +1,0 @@
-@startuml
-class MainWindowViewModel {
-    + MainWindowViewModel()
-    + ToggleSettings() : void
-}
-ViewModelBase <|-- MainWindowViewModel
-MainWindowViewModel --> "_content" ViewModelBase
-MainWindowViewModel --> "Content" ViewModelBase
-@enduml

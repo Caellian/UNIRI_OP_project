@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Data;
+using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.Converters;
+using Avalonia.Markup.Xaml.MarkupExtensions;
+using Avalonia.Media;
+using Avalonia.Styling;
 using Newtonsoft.Json;
 using Wordel.Model;
 using Wordel.ViewModels;
@@ -64,7 +72,7 @@ public class WordList
 
     public WordList(CultureInfo cultureInfo)
     {
-        Words = File.ReadAllLines($"Assets/i18n/dict.{cultureInfo.Name}.txt");
+        Words = Io.WordList($"Assets/i18n/dict.{cultureInfo.Name}.txt");
     }
 
     public string[] GetSized(int size)
@@ -90,12 +98,14 @@ public class WordList
 
 public class Locale
 {
+    private readonly CultureInfo _cultureInfo;
     public readonly Dictionary<string, string> Strings;
     public readonly Keyboard Keyboard;
     public readonly WordList WordList;
 
     public Locale(CultureInfo cultureInfo)
     {
+        _cultureInfo = cultureInfo;
         {
             var loaded =
                 Io.DeserializeFile<Dictionary<string, string>>($"Assets/i18n/interface.{cultureInfo.Name}.json");
@@ -108,9 +118,50 @@ public class Locale
         WordList = new WordList(cultureInfo);
     }
 
-    public string Format(string formatted)
+    public string Name => _cultureInfo.Name;
+}
+
+public static class LocaleStorage
+{
+    private static CultureInfo[]? _supportedCultures;
+    private static Dictionary<CultureInfo, Locale> _locales = new ();
+    public static CultureInfo? CurrentCulture = new ("en");
+
+    public static CultureInfo[] SupportedCultures
     {
-        // FIXME(tin): debug
+        get
+        {
+            if (_supportedCultures != null) return _supportedCultures;
+
+            return _supportedCultures = Io.DeserializeFile<string[]>("Assets/i18n/lang.json")?.Select(it => new CultureInfo(it)).ToArray()!;
+        }
+    }
+
+    public static Dictionary<CultureInfo, Locale> Locales
+    {
+        get
+        {
+            if (SupportedCultures.Length == _locales.Count) return _locales;
+
+            foreach (var culture in SupportedCultures)
+            {
+                var locale = new Locale(culture);
+                _locales.Add(culture, locale);
+            }
+
+            return _locales;
+        }
+    }
+
+    public static Locale? CurrentLocale => CurrentCulture == null ? null : Locales[CurrentCulture];
+
+    public static string GetTranslation(string key)
+    {
+        return CurrentLocale?.Strings.ContainsKey(key) == true ? CurrentLocale.Strings[key] : key;
+    }
+    
+    public static string Format(string formatted)
+    {
         if (formatted.Length <= 4)
         {
             return formatted;
@@ -148,8 +199,8 @@ public class Locale
                 throw new ArgumentException($"empty localized string in '{formatted}' starting at {built.Length + startIndex}");
             }
             
-            string key = remaining[(startIndex + 2)..(startIndex + 2 + endIndex)];
-            string value = Strings.ContainsValue(key) ? Strings[key] : key;
+            var key = remaining[(startIndex + 2)..(startIndex + 2 + endIndex)];
+            var value = GetTranslation(key);
             
             remaining = remaining[(startIndex + endIndex + 4)..];
             built += value;
@@ -157,47 +208,4 @@ public class Locale
 
         return built;
     }
-}
-
-public static class LocaleStorage
-{
-    private static CultureInfo[]? _supportedCultures;
-    private static Dictionary<CultureInfo, Locale> _locales = new ();
-    public static CultureInfo? CurrentCulture;
-
-    public static CultureInfo[] SupportedCultures
-    {
-        get
-        {
-            if (_supportedCultures != null) return _supportedCultures;
-            
-            Stream stream = File.Open("Assets/i18n/lang.json", FileMode.Open);
-
-            string json;
-            using (var reader = new StreamReader(stream))
-            {
-                json = reader.ReadToEnd();
-            }
-            
-            return _supportedCultures = JsonConvert.DeserializeObject<string[]>(json)?.Select(it => new CultureInfo(it)).ToArray()!;
-        }
-    }
-
-    public static Dictionary<CultureInfo, Locale> Locales
-    {
-        get
-        {
-            if (SupportedCultures.Length == _locales.Count()) return _locales;
-
-            foreach (var culture in SupportedCultures)
-            {
-                var locale = new Locale(culture);
-                _locales.Add(culture, locale);
-            }
-
-            return _locales;
-        }
-    }
-
-    public static Locale? CurrentLocale => CurrentCulture == null ? null : Locales[CurrentCulture];
 }

@@ -1,4 +1,10 @@
 {
-  "WordLength": "Duljina riječi",
-  "TryCount": "Broj pokušaja"
+  "UnknownWord": "Nepoznata riječ",
+  "InputNotInDict": "Unesena riječ se ne nalazi u rječniku.",
+  "LanguageSettingsOption": "Jezik:",
+  "WordLengthSettingsOption": "Duljina riječi:",
+  "MaxAnswersSettingsOption": "Br. pokušaja:",
+  "GameVictory": "Pobjeda!",
+  "GameFail": "Izgubili ste!",
+  "CorrectAnswer": "Točan odgovor"
 }

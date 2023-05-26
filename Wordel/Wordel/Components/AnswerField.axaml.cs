@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Linq;
 using Avalonia;
@@ -50,6 +51,42 @@ public partial class AnswerField : UserControl
     {
         get => GetValue(CellSpacingProperty);
         set => SetValue(CellSpacingProperty, value);
+    }
+
+    public static readonly StyledProperty<ISolidColorBrush> BorderBrushProperty = AvaloniaProperty.Register<AnswerField, ISolidColorBrush>(
+        "BorderBrush");
+
+    public ISolidColorBrush BorderBrush
+    {
+        get => GetValue(BorderBrushProperty);
+        set => SetValue(BorderBrushProperty, value);
+    }
+
+    public static readonly StyledProperty<ISolidColorBrush> BackgroundCorrectProperty = AvaloniaProperty.Register<AnswerField, ISolidColorBrush>(
+        "BackgroundCorrect", Brushes.DarkGreen);
+
+    public ISolidColorBrush BackgroundCorrect
+    {
+        get => GetValue(BackgroundCorrectProperty);
+        set => SetValue(BackgroundCorrectProperty, value);
+    }
+
+    public static readonly StyledProperty<ISolidColorBrush> BackgroundPossibleProperty = AvaloniaProperty.Register<AnswerField, ISolidColorBrush>(
+        "BackgroundPossible", Brushes.DarkBlue);
+
+    public ISolidColorBrush BackgroundPossible
+    {
+        get => GetValue(BackgroundPossibleProperty);
+        set => SetValue(BackgroundPossibleProperty, value);
+    }
+
+    public static readonly StyledProperty<ISolidColorBrush> BackgroundWrongProperty = AvaloniaProperty.Register<AnswerField, ISolidColorBrush>(
+        "BackgroundWrong", Brushes.DarkRed);
+
+    public ISolidColorBrush BackgroundWrong
+    {
+        get => GetValue(BackgroundWrongProperty);
+        set => SetValue(BackgroundWrongProperty, value);
     }
 
     public static readonly StyledProperty<double> BorderThicknessProperty =
@@ -109,10 +146,10 @@ public partial class AnswerField : UserControl
         {
             result[i] = uses[i] switch
             {
-                LetterUse.Currect => Brushes.DarkGreen,
-                LetterUse.Possible => Brushes.DarkBlue,
-                LetterUse.Wrong => Brushes.DarkRed,
-                _ => Brushes.Transparent,
+                LetterUse.Currect => BackgroundCorrect,
+                LetterUse.Possible => BackgroundPossible,
+                LetterUse.Wrong => BackgroundWrong,
+                _ => Brushes.Transparent
             };
         }
         return result;
@@ -125,14 +162,14 @@ public partial class AnswerField : UserControl
         for (var i = 0; i < MaxLength; i++)
         {
             var pos = new Point(BorderThickness + i * (CellWidth + CellSpacing), BorderThickness);
-            
-            context.DrawRectangle(fill[i], new Pen(Brushes.Gray, BorderThickness),
+
+            context.DrawRectangle(fill[i], new Pen(BorderBrush, BorderThickness),
                 new Rect(pos, new Size(CellWidth, CellHeight)), 4, 4);
 
             if (i >= _currentAnswer.Length) continue;
-            var answerLetter = _currentAnswer.ToCharArray().GetValue(i)!;
+            var answerLetter = _currentAnswer.ToCharArray().GetValue(i);
 
-            var text = new FormattedText(answerLetter.ToString(), CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
+            var text = new FormattedText(answerLetter?.ToString() ?? "", CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
                 Typeface.Default, 22,
                 Brushes.WhiteSmoke);
             var textPos = new Point(pos.X + (CellWidth / 2.0) - (text.Width / 2.0),

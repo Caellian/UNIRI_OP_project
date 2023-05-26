@@ -1,0 +1,13 @@
+@startuml
+class GameState {
+    + CorrectAnswer : string
+    + CurrentTry : int
+    + WordLength : int <<get>>
+    + MaxAnswers : int <<get>>
+    + GameState(settings:Settings)
+    + Reset() : void
+}
+class "List`1"<T> {
+}
+GameState --> "Answers<string>" "List`1"
+@enduml

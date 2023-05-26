@@ -1,12 +1,34 @@
 # Wordel
 
-![Prikaz aplikacije](img/preview.png)
+![App preview](img/preview.png)
 
-GitHub: [Caellian/UNIRI_OP_project](https://github.com/Caellian/UNIRI_OP_project)
+## Build
 
-Dokumentacija: ([pdf](https://github.com/Caellian/UNIRI_OP_project/raw/main/tin_svagelj.pdf)|[docx](https://github.com/Caellian/UNIRI_OP_project/raw/main/tin_svagelj.docx))
+C# sdk and runtime are required to build and run native app:
 
-## Licenca
+```sh
+pacman -Sy dotnet-sdk dotnet-runtime
+```
 
-Aplikacija je licencirana pod MIT licencom za softver.
-Kopija licence je dostupna u [LICENSE](./LICENSE) datoteci.
+Build
+
+### Android
+
+Android build additionaly requires android dotnet workload:
+
+```sh
+sudo dotnet workload install android
+```
+
+### Web
+
+Browser build requires wasm-tools:
+
+```sh
+sudo dotnet workload install wasm-tools
+```
+
+## License
+
+Code for this app is licensed under MIT license.
+A copy of the license is available in the [LICENSE](./LICENSE) file.

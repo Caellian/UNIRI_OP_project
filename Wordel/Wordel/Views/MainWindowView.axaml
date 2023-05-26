@@ -7,9 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="600"
         Width="400" Height="600"
         x:Class="Wordel.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/icon.ico"
         Title="Wordel"
-        Foreground="White"
-        Background="#222"
         Content="{Binding Content}">
 </Window>

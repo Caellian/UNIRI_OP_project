@@ -1,0 +1,7 @@
+@startuml
+class MainWindow <<partial>> {
+    + MainWindow()
+    # <<override>> OnKeyDown(e:KeyEventArgs) : void
+}
+Window <|-- MainWindow
+@enduml

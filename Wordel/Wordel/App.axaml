@@ -1,12 +1,54 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:Wordel"
+             xmlns:components="clr-namespace:Wordel.Components"
              x:Class="Wordel.App">
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
-
+    
     <Application.Styles>
-        <FluentTheme/>
+        <FluentTheme />
+        <Style Selector="Window">
+            <Setter Property="Background" Value="{DynamicResource BackgroundBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style Selector="components|AnswerField">
+            <Setter Property="BackgroundCorrect" Value="{DynamicResource CorrectAnswerBrush}" />
+            <Setter Property="BackgroundPossible" Value="{DynamicResource PossibleAnswerBrush}" />
+            <Setter Property="BackgroundWrong" Value="{DynamicResource WrongAnswerBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        </Style>
+        <Style Selector="Button.keyboard">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="FontWeight" Value="600"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+        </Style>
+        <Style Selector="Button.keyboard:pointerover">
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style Selector="Button.keyboard:pressed">
+            <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}"/>
+        </Style>
+        <StyleInclude Source="Components/IconButton.axaml" />
     </Application.Styles>
+
+    <Application.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush">#262f41</SolidColorBrush>
+        <SolidColorBrush x:Key="BackgroundHighlightBrush">#2e394e</SolidColorBrush>
+        <SolidColorBrush x:Key="BackgroundActiveBrush">#3a4762</SolidColorBrush>
+        <SolidColorBrush x:Key="ForegroundBrush">#f9fafb</SolidColorBrush>
+        <SolidColorBrush x:Key="BorderBrush">#4b5d80</SolidColorBrush>
+        
+        <SolidColorBrush x:Key="WrongAnswerBrush">#a53b20</SolidColorBrush>
+        <SolidColorBrush x:Key="PossibleAnswerBrush">#2069a5</SolidColorBrush>
+        <SolidColorBrush x:Key="CorrectAnswerBrush">#529c58</SolidColorBrush>
+        
+        <SolidColorBrush x:Key="AccentBrush">#2EB5D1</SolidColorBrush>
+    </Application.Resources>
 </Application>

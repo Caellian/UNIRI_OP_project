@@ -7,6 +7,7 @@ namespace Wordel.ViewModels;
 public class MainWindowViewModel: ViewModelBase
 {
     private ViewModelBase _content;
+    private Settings _settings;
 
     public MainWindowViewModel()
     {
@@ -23,12 +24,23 @@ public class MainWindowViewModel: ViewModelBase
     {
         Content = Content switch
         {
-            GameViewModel gameModel => new SettingsViewModel(new Settings
-            {
-                MaxAnswers = gameModel.State.MaxAnswers, WordLength = gameModel.State.WordLength
-            }),
+            GameViewModel gameModel => new SettingsViewModel(gameModel.State.Settings),
             SettingsViewModel settingsModel => new GameViewModel(settingsModel.Settings),
             _ => Content
         };
+    }
+    
+    public void ToggleLeaderboard()
+    {
+        switch (Content)
+        {
+            case GameViewModel gameModel:
+                _settings = gameModel.State.Settings;
+                Content = new StatsViewModel();
+                break;
+            case StatsViewModel:
+                Content = new GameViewModel(_settings);
+                break;
+        }
     }
 }

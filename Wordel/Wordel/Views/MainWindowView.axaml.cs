@@ -14,13 +14,22 @@ public partial class MainWindow : Window
 
     protected override void OnKeyDown(KeyEventArgs e)
     {
+        base.OnKeyDown(e);
         var content = (DataContext as MainWindowViewModel)?.Content;
         if (content is not GameViewModel model) return;
         
+        // ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
         switch (e.Key)
         {
             case Key.Enter:
-                model.ConfirmAnswer();
+                if (model.State.CurrentTry < model.State.Settings.MaxAnswers)
+                {
+                    model.ConfirmAnswer();
+                }
+                else
+                {
+                    model.StartNewGame();
+                }
                 break;
             case Key.Back:
                 model.RemoveLetter();

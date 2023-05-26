@@ -1,0 +1,17 @@
+@startuml
+class GameViewModel {
+    + GameViewModel()
+    + GameViewModel(settings:Settings)
+    + CurrentAnswer : string <<get>> <<set>>
+    + CurrentTry : int <<get>> <<set>>
+    + StartNewGame() : void
+    + EnterLetter(letter:char) : void
+    + RemoveLetter() : void
+    + ConfirmAnswer() : void
+}
+ViewModelBase <|-- GameViewModel
+GameViewModel --> "_state" GameState
+GameViewModel o-> "_status" GameStatus
+GameViewModel --> "State" GameState
+GameViewModel --> "Status" GameStatus
+@enduml

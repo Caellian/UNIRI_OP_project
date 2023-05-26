@@ -1,0 +1,6 @@
+@startuml
+class Settings <<record>> <<struct>> {
+    + WordLength : int <<get>> <<set>> = 5
+    + MaxAnswers : int <<get>> <<set>> = 5
+}
+@enduml

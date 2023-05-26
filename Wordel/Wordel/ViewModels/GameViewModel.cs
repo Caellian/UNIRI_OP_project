@@ -62,7 +62,7 @@ public class GameViewModel : ViewModelBase
 
     public void EnterLetter(char letter)
     {
-        if (CurrentAnswer.Length < State.WordLength)
+        if (CurrentAnswer.Length < State.Settings.WordLength)
         {
             CurrentAnswer += letter;
         }
@@ -79,23 +79,25 @@ public class GameViewModel : ViewModelBase
     public void ConfirmAnswer()
     {
         var current = State.Answers[State.CurrentTry];
-        if (current.Length == State.WordLength)
+        if (current.Length == State.Settings.WordLength)
         {
             if (current == State.CorrectAnswer)
             {
                 Status = GameStatus.Win;
                 return;
-            } else if (!LocaleStorage.CurrentLocale!.WordList.TestWord(current))
+            }
+            
+            if (!LocaleStorage.CurrentLocale!.WordList.TestWord(current))
             {
-                var dialog = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxStandardWindow("Nepoznata riječ",
-                    "Unesena riječ se ne nalazi u rječniku.", icon: Icon.Warning);
+                var dialog = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxStandardWindow(LocaleStorage.GetTranslation("UnknownWord"),
+                    LocaleStorage.GetTranslation("InputNotInDict"), icon: Icon.Warning);
                 dialog.Show();
                 return;
             }
             
             CurrentTry += 1;
 
-            if (State.CurrentTry == State.MaxAnswers)
+            if (State.CurrentTry == State.Settings.MaxAnswers)
             {
                 Status = GameStatus.Lose;
             }

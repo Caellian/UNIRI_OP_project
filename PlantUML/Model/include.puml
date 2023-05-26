@@ -1,7 +1,0 @@
-@startuml
-!include ./Settings.puml
-!include ./WordList.puml
-!include ./GameState.puml
-!include ./GameStatus.puml
-!include ./LetterUse.puml
-@enduml
