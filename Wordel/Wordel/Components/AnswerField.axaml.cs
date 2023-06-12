@@ -146,7 +146,7 @@ public partial class AnswerField : UserControl
         {
             result[i] = uses[i] switch
             {
-                LetterUse.Currect => BackgroundCorrect,
+                LetterUse.Correct => BackgroundCorrect,
                 LetterUse.Possible => BackgroundPossible,
                 LetterUse.Wrong => BackgroundWrong,
                 _ => Brushes.Transparent
@@ -157,7 +157,7 @@ public partial class AnswerField : UserControl
 
     public override void Render(DrawingContext context)
     {
-        var fill = UseColors(WordUtil.MatchInput(_correctAnswer, _currentAnswer, MaxLength));
+        var fill = UseColors(WordUtil.MatchInput(_correctAnswer, _currentAnswer));
         
         for (var i = 0; i < MaxLength; i++)
         {

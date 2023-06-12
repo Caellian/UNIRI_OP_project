@@ -78,9 +78,36 @@
 \tableofcontents
 \newpage
 
+\chapter{Testiranje jedinica}
+
+Avalonia UI podržava testiranje jedinica koda (engl. unit test).
+Takvi testovi dozvoljavaju provjeru određenih segmenata koda koji nisu usko vezani uz druge ponašanjem (tj. funkcioniraju sami za sebe).
+
+U slučaju Wordel aplikacije je bilo smisleno koristiti ovakvo testiranje za provjeru rada \verb|WordUtil#MatchInput| funkcije koja služi za usporedbu riječi i vraća polje \verb|LetterUse|
+koje daje povratnu informaciju koja slova unesene riječi se nalaze u očekivanoj riječi, koja su samo na krivom mjestu, i koja nisu uključena.
+S obzirom da funkcija ne ovisi o stanju aplikacije, lagano ju je testirati.
+
+Ti testovi su uvedeni u \textit{TextMatchingTest.cs} datoteci:
+
+\inputminted{cs}{../../Wordel/Wordel.Tests/TextMatchingTest.cs}
+
+Prilikom implementacije testova sam pronašao pogrešku u testiranom algoritmu s \verb|MatchInput_OnePossible_ReturnsWrongsIfCorrectlyUsedLater| testom.
+
+\chapter{Testiranje grafičkog sučelja}
+
+Testiranje grafičkog sučelja (engl. UI test) dozvoljava automatiziranje testiranja interakcije korisnika s grafičkim sučeljem.
+S obzirom da je Avalonia UI framework koji cilja nekoliko različitih platformi, provođenje ovakvih testova bi bilo potrebno za svaku od ciljanih platformi.
+
+\smallskip
+
+\textbf{Selenium} dozvoljava testiranje grafičkog sučelja u pregledniku.\par
+\textbf{Appium} dozvoljava testiranje grafičkog sučelja za nativne aplikacije.\par
+Avalonia UI ima i svoj framework za testiranje grafičkih sučelja koji se zove \textbf{Avalonia.UnitTests}.\par
+
+S obzirom na stupanj kopleksnosti aplikacije, nisam smatrao potrebnim ovu vrstu testova, no u velikim aplikacijama
+koje imaju mnogo dinamičnih sučelja bi ovakvi testovi bili iznimno korisni za potvrđivanje da korisnici imaju dobro iskustvo prilikom korištenja aplikacije.
+
 \pagenumbering{arabic}
 \setcounter{page}{1}
-
-
 
 \end{document}

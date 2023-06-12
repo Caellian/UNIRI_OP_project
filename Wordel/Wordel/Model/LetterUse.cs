@@ -7,13 +7,15 @@ public enum LetterUse
     Unknown = 0,
     Wrong = 1,
     Possible = 2,
-    Currect = 3
+    Correct = 3
 }
 
 public static class WordUtil
 {
-    public static LetterUse[] MatchInput(string target, string current, int maxLength)
+    public static LetterUse[] MatchInput(string target, string current)
     {
+        var maxLength = target.Length;
+        
         var result = new LetterUse[maxLength];
         for (var i = 0; i < maxLength; i++)
         {
@@ -44,7 +46,7 @@ public static class WordUtil
             if (target[i] == current[i])
             {
                 remLet[letter] -= 1;
-                result[i] = LetterUse.Currect;
+                result[i] = LetterUse.Correct;
                 continue;
             }
 
