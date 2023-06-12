@@ -13,7 +13,6 @@ namespace Wordel.ViewModels;
 public class GameViewModel : ViewModelBase
 {
     private GameState _state;
-
     private GameStatus _status = GameStatus.Play;
 
     public GameViewModel()
@@ -38,12 +37,21 @@ public class GameViewModel : ViewModelBase
         set => this.RaiseAndSetIfChanged(ref _status, value);
     }
 
-    public string CurrentAnswer
+    public string? CurrentAnswer
     {
-        get => State.Answers[State.CurrentTry];
+        get => State.CurrentTry < State.Answers.Count ? State.Answers[State.CurrentTry] : null;
         set
         {
-            _state.Answers[_state.CurrentTry] = value;
+            if (value == null) return;
+            
+            if (State.CurrentTry == State.Answers.Count)
+            {
+                State.Answers.Add(value);
+            }
+            else
+            {
+                _state.Answers[_state.CurrentTry] = value;
+            }
             this.RaisePropertyChanged();
         }
     }
@@ -62,7 +70,10 @@ public class GameViewModel : ViewModelBase
 
     public void EnterLetter(char letter)
     {
-        if (CurrentAnswer.Length < State.Settings.WordLength)
+        if (CurrentAnswer == null)
+        {
+            CurrentAnswer = letter.ToString();
+        } else if (CurrentAnswer.Length < State.Settings.WordLength)
         {
             CurrentAnswer += letter;
         }
@@ -70,6 +81,8 @@ public class GameViewModel : ViewModelBase
 
     public void RemoveLetter()
     {
+        if (CurrentAnswer == null) return;
+        
         if (CurrentAnswer.Length > 0)
         {
             CurrentAnswer = CurrentAnswer.Substring(0, CurrentAnswer.Length - 1);
@@ -79,28 +92,27 @@ public class GameViewModel : ViewModelBase
     public void ConfirmAnswer()
     {
         var current = State.Answers[State.CurrentTry];
-        if (current.Length == State.Settings.WordLength)
+        if (current.Length != State.Settings.WordLength) return;
+        
+        if (current == State.CorrectAnswer)
         {
-            if (current == State.CorrectAnswer)
-            {
-                Status = GameStatus.Win;
-                return;
-            }
+            Status = GameStatus.Win;
+            return;
+        }
             
-            if (!LocaleStorage.CurrentLocale!.WordList.TestWord(current))
-            {
-                var dialog = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxStandardWindow(LocaleStorage.GetTranslation("UnknownWord"),
-                    LocaleStorage.GetTranslation("InputNotInDict"), icon: Icon.Warning);
-                dialog.Show();
-                return;
-            }
+        if (!LocaleStorage.CurrentLocale!.WordList.TestWord(current))
+        {
+            var dialog = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxStandardWindow(LocaleStorage.GetTranslation("UnknownWord"),
+                LocaleStorage.GetTranslation("InputNotInDict"), icon: Icon.Warning);
+            dialog.Show();
+            return;
+        }
             
-            CurrentTry += 1;
+        CurrentTry += 1;
 
-            if (State.CurrentTry == State.Settings.MaxAnswers)
-            {
-                Status = GameStatus.Lose;
-            }
+        if (State.CurrentTry == State.Settings.MaxAnswers)
+        {
+            Status = GameStatus.Lose;
         }
     }
 }

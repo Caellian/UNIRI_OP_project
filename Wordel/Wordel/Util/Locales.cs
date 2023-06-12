@@ -27,7 +27,7 @@ public class Keyboard
     public Keyboard(CultureInfo cultureInfo)
     {
         var loaded =
-            Io.DeserializeFile<Dictionary<string, string[]>>($"Assets/i18n/keyboard.{cultureInfo.Name}.json");
+            SysUtil.DeserializeFile<Dictionary<string, string[]>>($"Assets/i18n/keyboard.{cultureInfo.Name}.json");
         if (loaded == null) return;
         
         upper = loaded["upper"];
@@ -72,7 +72,7 @@ public class WordList
 
     public WordList(CultureInfo cultureInfo)
     {
-        Words = Io.WordList($"Assets/i18n/dict.{cultureInfo.Name}.txt");
+        Words = SysUtil.WordList($"Assets/i18n/dict.{cultureInfo.Name}.txt");
     }
 
     public string[] GetSized(int size)
@@ -108,7 +108,7 @@ public class Locale
         _cultureInfo = cultureInfo;
         {
             var loaded =
-                Io.DeserializeFile<Dictionary<string, string>>($"Assets/i18n/interface.{cultureInfo.Name}.json");
+                SysUtil.DeserializeFile<Dictionary<string, string>>($"Assets/i18n/interface.{cultureInfo.Name}.json");
             if (loaded != null)
             {
                 Strings = loaded;
@@ -133,7 +133,8 @@ public static class LocaleStorage
         {
             if (_supportedCultures != null) return _supportedCultures;
 
-            return _supportedCultures = Io.DeserializeFile<string[]>("Assets/i18n/lang.json")?.Select(it => new CultureInfo(it)).ToArray()!;
+            var langs = SysUtil.DeserializeFile<string[]?>("Assets/i18n/lang.json");
+            return _supportedCultures = langs?.Select(it => new CultureInfo(it)).ToArray() ?? new []{new CultureInfo("en")};
         }
     }
 

@@ -1,0 +1,86 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8
+% !BIB program = biber
+
+\documentclass[12pt,a4paper]{report}
+
+% generira bookmarkove
+\usepackage{bookmark}
+
+% Podrška za hrvatski
+\usepackage[croatian]{babel}
+\usepackage{csquotes}
+
+% Margine
+\usepackage[left=3cm,top=2.5cm,right=2.5cm,bottom=3.5cm]{geometry}
+
+% Simboli i naredbe za matematiku
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{subcaption} % side-by-side grafovi
+
+% Podrška za slike
+\usepackage{graphicx} % \includegraphics [k=v] interface
+
+% Poveznice
+\usepackage{hyperref}
+
+% Blokovi s kodom
+\usepackage{minted}
+\ifx\write18\relax\else
+\usemintedstyle{sas}
+\fi
+
+% Literatura
+\usepackage[sorting=none,backend=biber,style=numeric]{biblatex}
+\addbibresource{seminar.bib}
+
+% Fonts:
+\usepackage[T1]{fontenc} % Allows specifying fonts
+\usepackage{helvet} % Helvetica; phv
+\usepackage{palatino} % Palatino; ppl
+
+\gdef \title{Testiranje}
+\gdef \class{Uvod u programsko inženjerstvo}
+\gdef \author{Tin Švagelj}
+\gdef \uniprogram{Preddimplski studij informatike}
+\gdef \semguide{Izv. prof. dr. sc. Sanja Čandrlić}
+\gdef \author{Tin Švagelj}
+\gdef \date{\today}
+
+% Custom commands and redefinitions
+\newcommand{\UseFont}[1]{\fontfamily{#1}\selectfont}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]
+{\normalfont\Large\bfseries}{\thechapter}{20pt}{\Large}
+
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+% \fancyhead{}
+% \renewcommand\headrulewidth{0.1pt}
+% \fancyhead[L]{\footnotesize \leftmark}
+% \fancyhead[R]{\footnotesize \thepage}
+% \renewcommand\headrulewidth{0pt}
+% \fancyfoot[R]{\small Fakultet Informatike i\\Digitalnih Tehnologija}
+% \renewcommand\footrulewidth{0.1pt}
+% \fancyfoot[C]{2022 - 2023}
+% \fancyfoot[L]{\small \title}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\include{test_cover.tex}
+
+\pagenumbering{roman}
+
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+
+\end{document}

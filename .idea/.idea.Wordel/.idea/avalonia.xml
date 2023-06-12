@@ -18,6 +18,7 @@
         <entry key="Wordel/Wordel/Views/MainView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Views/MainWindow.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Views/MainWindowView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+        <entry key="Wordel/Wordel/Views/PermissionView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Views/SettingsView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Views/StatsView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Views/VictoryView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />

@@ -5,9 +5,9 @@ using Wordel.ViewModels;
 
 namespace Wordel.Views;
 
-public partial class MainWindow : Window
+public partial class MainWindowView : Window
 {
-    public MainWindow()
+    public MainWindowView()
     {
         InitializeComponent();
     }

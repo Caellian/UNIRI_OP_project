@@ -1,4 +1,3 @@
-using System;
 using ReactiveUI;
 using Wordel.Model;
 
@@ -11,7 +10,8 @@ public class MainWindowViewModel: ViewModelBase
 
     public MainWindowViewModel()
     {
-        _content = new GameViewModel(new Settings());
+        _settings = new Settings();
+        _content = new GameViewModel(_settings);
     }
 
     public ViewModelBase Content

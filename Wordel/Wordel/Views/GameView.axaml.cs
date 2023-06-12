@@ -22,16 +22,26 @@ public partial class GameView : UserControl
         InitializeComponent();
     }
 
-    private void RebuildLetterGrid()
+    private void RebuildLetterGrid(GameViewModel model)
     {
-        var state = (DataContext as GameViewModel)?.State;
+        var state = model.State;
+        var maxAnswers = state?.Settings.MaxAnswers ?? 0;
 
-        AnswerStackPanel.Children.Clear();
-        for (var i = 0; i < state.Settings.MaxAnswers; i++)
+        var ans = new TextBox()
         {
+            Text = state?.CorrectAnswer ?? "null"
+        };
+        
+        
+        AnswerStackPanel.Children.Clear();
+        AnswerStackPanel.Children.Add(ans);
+        
+        for (var i = 0; i < maxAnswers; i++)
+        {
+            var currentAnswer = state.Answers.Count > i ? state.Answers[i] : "";
             var af = new AnswerField
             {
-                CurrentAnswer = state.Answers[i],
+                CurrentAnswer = currentAnswer,
                 CorrectAnswer = i < state.CurrentTry ? state.CorrectAnswer : "",
                 MaxLength = state.Settings.WordLength
             };
@@ -41,10 +51,9 @@ public partial class GameView : UserControl
         }
     }
 
-    private void BuildKeyboard()
+    private void BuildKeyboard(GameViewModel model)
     {
         KeyboardStackPanel.Children.Clear();
-        var model = (DataContext as GameViewModel)!;
         
         var rows = LocaleStorage.CurrentLocale!.Keyboard.lower;
         foreach (var row in rows)
@@ -78,7 +87,7 @@ public partial class GameView : UserControl
             {
                 var eraseButton = new Button
                 {
-                    Content = "<-",
+                    Content = "&lt;-",
                     Command = ReactiveCommand.Create(() =>
                     {
                         model.RemoveLetter();
@@ -124,10 +133,9 @@ public partial class GameView : UserControl
         }
     }
 
-    private void ShowStatus()
+    private void ShowStatus(GameViewModel model)
     {
-        var ctx = (DataContext as GameViewModel);
-        var status = ctx?.Status;
+        var status = model.Status;
         
         var statusMsg = new TextPresenter
         {
@@ -152,7 +160,7 @@ public partial class GameView : UserControl
                 
                 var correctDisplay = new TextPresenter
                 {
-                    Text = LocaleStorage.Format("{{CorrectAnswer}}: '" + ctx.State.CorrectAnswer + "'"),
+                    Text = LocaleStorage.Format("{{CorrectAnswer}}: '" + model.State.CorrectAnswer + "'"),
                     HorizontalAlignment = HorizontalAlignment.Center,
                     FontSize = 18,
                 };
@@ -167,7 +175,7 @@ public partial class GameView : UserControl
     protected override void OnLoaded()
     {
         base.OnLoaded();
-        
+
         var ctx = (DataContext as GameViewModel);
         ctx?.Changed.Subscribe(delegate(IReactivePropertyChangedEventArgs<IReactiveObject> args)
         {
@@ -176,16 +184,20 @@ public partial class GameView : UserControl
                 case "State":
                 case "CurrentAnswer":
                 case "CurrentTry":
-                    RebuildLetterGrid();
+                    RebuildLetterGrid(ctx);
                     MessageStackPanel.Children.Clear();
                     break;
                 case "Status":
-                    ShowStatus();
+                    ShowStatus(ctx);
                     break;
             }
         });
-        RebuildLetterGrid();
-        BuildKeyboard();
+        
+        if (ctx != null)
+        {
+            RebuildLetterGrid(ctx);
+            BuildKeyboard(ctx);
+        }
     }
 
     private void NewGame_OnPointerReleased(object? sender, RoutedEventArgs routedEventArgs)

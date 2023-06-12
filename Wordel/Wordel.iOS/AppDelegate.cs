@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.iOS;
 using Avalonia.Media;
 using Avalonia.ReactiveUI;
+using Wordel.Util;
 
 namespace Wordel.iOS;
 
@@ -16,6 +17,7 @@ public partial class AppDelegate : AvaloniaAppDelegate<App>
 {
     protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
     {
+        Io.Environment = RunEnv.Android;
         return builder.UseReactiveUI();
     }
 }

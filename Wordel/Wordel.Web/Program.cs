@@ -1,17 +1,26 @@
 ﻿using System.Runtime.Versioning;
+using System.Threading.Tasks;
 using Avalonia;
-using Avalonia.Web;
+using Avalonia.Browser;
 using Avalonia.ReactiveUI;
 using Wordel;
+using Wordel.Util;
 
 [assembly: SupportedOSPlatform("browser")]
-
 internal partial class Program
 {
-    private static void Main(string[] args) => BuildAvaloniaApp()
-        .UseReactiveUI()
-        .SetupBrowserApp("out");
-
+    private static async Task Main(string[] args)
+    {
+        Wordel.Util.SysUtil.Environment = RunEnv.Web;
+        
+        await BuildAvaloniaApp()
+            .UseReactiveUI()
+            .StartBrowserAppAsync("out");
+    }
+    
     public static AppBuilder BuildAvaloniaApp()
-        => AppBuilder.Configure<App>();
+    {
+        Wordel.Util.SysUtil.Environment = RunEnv.Android;
+        return AppBuilder.Configure<App>();
+    }
 }

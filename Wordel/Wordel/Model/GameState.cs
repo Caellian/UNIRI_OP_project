@@ -16,32 +16,27 @@ public class GameState
     public GameState(Settings settings)
     {
         Settings = settings;
-        CorrectAnswer = RandomWord(settings.WordLength);
+        CorrectAnswer = RandomWord(settings.WordLength) ?? "";
         Answers = new List<string>(settings.MaxAnswers);
-        // TODO: Remove greedy answer init
-        for (var i = 0; i < Answers.Capacity; i++)
-        {
-            Answers.Add(new string(""));
-        }
-
         CurrentTry = 0;
     }
 
     public void Reset()
     {
-        CorrectAnswer = RandomWord(CorrectAnswer.Length);
-        Answers = new List<string>(Answers.Capacity);
-        for (var i = 0; i < Answers.Capacity; i++)
-        {
-            Answers.Add(new string(""));
-        }
-
+        CorrectAnswer = RandomWord(Settings.WordLength) ?? "";
+        Answers = new List<string>(Settings.MaxAnswers);
         CurrentTry = 0;
     }
 
-    static string RandomWord(int length)
+    public static string? RandomWord(int length)
     {
         var words = LocaleStorage.CurrentLocale!.WordList.GetSized(length);
-        return words[_rand.Next(words.Length)];
+        
+        if (words.Length > 0)
+        {
+            return words[_rand.Next(words.Length)];
+        }
+
+        return null;
     }
 }

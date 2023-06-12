@@ -19,19 +19,20 @@ public partial class App : Application
     {
         LocaleStorage.CurrentCulture = LocaleStorage.SupportedCultures[0];
         
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        switch (ApplicationLifetime)
         {
-            desktop.MainWindow = new MainWindow
-            {
-                DataContext = new MainWindowViewModel()
-            };
-        }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
-        {
-            singleViewPlatform.MainView = new GameView
-            {
-                DataContext = new MainWindowViewModel()
-            };
+            case IClassicDesktopStyleApplicationLifetime desktop:
+                desktop.MainWindow = new MainWindowView
+                {
+                    DataContext = new MainWindowViewModel()
+                };
+                break;
+            case ISingleViewApplicationLifetime singleViewPlatform:
+                singleViewPlatform.MainView = new MainWindowView
+                {
+                    DataContext = new MainWindowViewModel()
+                };
+                break;
         }
 
         base.OnFrameworkInitializationCompleted();
