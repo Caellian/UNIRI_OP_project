@@ -12,7 +12,7 @@
     <Grid RowDefinitions="Auto, *">
         <Grid Grid.Row="0" Height="50" ColumnDefinitions="*, Auto">
             <TextPresenter Grid.Column="0" 
-                           Margin="5,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontWeight="ExtraBold" FontSize="25">Stats</TextPresenter>
+                           Margin="5,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontWeight="ExtraBold" FontSize="25"  Text="{Binding ScreenTitle}" />
             
             <components:IconButton Grid.Column="1" Icon="/Assets/icons/close.png" Click="Close_OnPointerReleased" />
         </Grid>
@@ -32,17 +32,17 @@
                 </Style>
             </Grid.Styles>
             
-            <TextBlock Grid.Row="1" Grid.Column="0" Foreground="{DynamicResource CorrectAnswerBrush}">Games Won:</TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="1">31</TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="0" Foreground="{DynamicResource WrongAnswerBrush}">Games Lost:</TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="1">20</TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="0">Total Games Played:</TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="1">51</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" Foreground="{DynamicResource CorrectAnswerBrush}" Text="{Binding StatWins}"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Wins}" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Foreground="{DynamicResource WrongAnswerBrush}" Text="{Binding StatLoses}"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Loses}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding StatTotal}"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Plays}"/>
             
-            <TextBlock Grid.Row="5" Grid.Column="0">Longest Guessed Word:</TextBlock>
-            <TextBlock Grid.Row="5" Grid.Column="1">5 letters</TextBlock>
-            <TextBlock Grid.Row="6" Grid.Column="0">Quickest victory:</TextBlock>
-            <TextBlock Grid.Row="6" Grid.Column="1">1 try</TextBlock>
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding StatLongest}"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding LongestGuess}" />
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding StatQuickest}"/>
+            <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding QuickestVictory}" />
         </Grid>
     </Grid>
 </UserControl>

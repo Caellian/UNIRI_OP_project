@@ -5,9 +5,9 @@ using Wordel.ViewModels;
 
 namespace Wordel.Views;
 
-public partial class MainWindowView : Window
+public partial class MainView : UserControl
 {
-    public MainWindowView()
+    public MainView()
     {
         InitializeComponent();
     }
@@ -15,7 +15,7 @@ public partial class MainWindowView : Window
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
-        var content = (DataContext as MainWindowViewModel)?.Content;
+        var content = (DataContext as MainViewModel)?.Content;
         if (content is not GameViewModel model) return;
         
         // ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault

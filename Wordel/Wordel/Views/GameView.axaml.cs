@@ -61,7 +61,30 @@ public partial class GameView : UserControl
             var currentRow = new StackPanel();
             currentRow.Orientation = Orientation.Horizontal;
             currentRow.Spacing = 5;
-            currentRow.Margin = new Thickness(15.0 * KeyboardStackPanel.Children.Count, 0, 0, 0);
+
+            if (KeyboardStackPanel.Children.Count != 2)
+            {
+                currentRow.Margin = new Thickness(12.0 * KeyboardStackPanel.Children.Count, 0, 0, 0);
+            }
+            else
+            {
+                currentRow.Margin = new Thickness(12.0 * KeyboardStackPanel.Children.Count - 25.0, 0, 0, 0);
+            }
+            
+            if (KeyboardStackPanel.Children.Count == 2)
+            {
+                var eraseButton = new Button
+                {
+                    Content = "⌫",
+                    Command = ReactiveCommand.Create(model.RemoveLetter),
+                    Width = 45.0,
+                    Padding = new Thickness(),
+                    IsEnabled = model.Status == GameStatus.Play
+                };
+                eraseButton.Classes.Add("keyboard");
+                eraseButton.Classes.Add("erase");
+                currentRow.Children.Add(eraseButton);
+            }
             
             foreach (var letter in row)
             {
@@ -72,30 +95,27 @@ public partial class GameView : UserControl
                     {
                         model.EnterLetter(letter);
                     }),
-                    FontSize = 20.0,
-                    HorizontalContentAlignment = HorizontalAlignment.Center,
-                    VerticalContentAlignment = VerticalAlignment.Center,
-                    Width = 30.0,
-                    Height = 32.0,
-                    Padding = new Thickness()
+                    Padding = new Thickness(),
                 };
                 button.Classes.Add("keyboard");
                 currentRow.Children.Add(button);
             }
-
+            
             if (KeyboardStackPanel.Children.Count == 2)
             {
-                var eraseButton = new Button
+                var confirmButton = new Button
                 {
-                    Content = "&lt;-",
-                    Command = ReactiveCommand.Create(() =>
-                    {
-                        model.RemoveLetter();
-                    })
+                    Content = model.Status == GameStatus.Play ? "↩" : "⟳",
+                    Command = ReactiveCommand.Create(model.ConfirmAnswer),
+                    FontSize = 22.0,
+                    Width = 45.0,
+                    Padding = new Thickness(),
                 };
-                eraseButton.Classes.Add("keyboard");
-                currentRow.Children.Add(eraseButton);
+                confirmButton.Classes.Add("keyboard");
+                confirmButton.Classes.Add("confirm");
+                currentRow.Children.Add(confirmButton);
             }
+
             KeyboardStackPanel.Children.Add(currentRow);
         }
     }
@@ -103,7 +123,7 @@ public partial class GameView : UserControl
     protected override void OnKeyDown(KeyEventArgs e)
     {
         base.OnKeyDown(e);
-        var content = (DataContext as MainWindowViewModel)?.Content;
+        var content = (DataContext as MainViewModel)?.Content;
         if (content is not GameViewModel model) return;
         
         switch (e.Key)
@@ -147,6 +167,8 @@ public partial class GameView : UserControl
         MessageStackPanel.Children.Clear();
         switch (status)
         {
+            case GameStatus.Play:
+                break;
             case GameStatus.Win:
                 statusMsg.Text = LocaleStorage.GetTranslation("GameVictory");
                 statusMsg.Foreground = Brushes.Green;
@@ -172,14 +194,14 @@ public partial class GameView : UserControl
         }
     }
     
-    protected override void OnLoaded()
+    protected override void OnLoaded(RoutedEventArgs args)
     {
-        base.OnLoaded();
+        base.OnLoaded(args);
 
         var ctx = (DataContext as GameViewModel);
-        ctx?.Changed.Subscribe(delegate(IReactivePropertyChangedEventArgs<IReactiveObject> args)
+        ctx?.Changed.Subscribe(delegate(IReactivePropertyChangedEventArgs<IReactiveObject> propertyChanged)
         {
-            switch (args.PropertyName)
+            switch (propertyChanged.PropertyName)
             {
                 case "State":
                 case "CurrentAnswer":
@@ -188,6 +210,7 @@ public partial class GameView : UserControl
                     MessageStackPanel.Children.Clear();
                     break;
                 case "Status":
+                    RebuildLetterGrid(ctx);
                     ShowStatus(ctx);
                     break;
             }
@@ -208,13 +231,13 @@ public partial class GameView : UserControl
 
     private void Settings_OnPointerReleased(object? sender, RoutedEventArgs routedEventArgs)
     {
-        var model = Parent?.DataContext as MainWindowViewModel;
+        var model = Parent?.DataContext as MainViewModel;
         model?.ToggleSettings();
     }
 
     private void Leaderboard_OnPointerReleased(object? sender, RoutedEventArgs routedEventArgs)
     {
-        var model = Parent?.DataContext as MainWindowViewModel;
+        var model = Parent?.DataContext as MainViewModel;
         model?.ToggleLeaderboard();
     }
 }

@@ -86,7 +86,7 @@ public static class SysUtil
         return GetStringAsync(path).Result;
     }
 
-    public static string? GetRemoteAssetString(string path)
+    public static string? GetResourceAssetString(string path)
     {
         // FIXME: Handle invalid references 
         var stream = AssetLoader.Open(new Uri(ResourceRoot + path));
@@ -96,8 +96,9 @@ public static class SysUtil
         }
     }
 
-    public static string? AccessAssetString(string path)
+    public static string? AccessAssetString(string assetPath)
     {
+        var path = Paths.AssetPath(assetPath);
         if (Environment == RunEnv.Desktop && File.Exists(path))
         {
             try
@@ -110,7 +111,7 @@ public static class SysUtil
             }
         }
 
-        var asset = GetRemoteAssetString(path);
+        var asset = GetResourceAssetString(assetPath);
         if (asset != null)
         {
             if (Environment == RunEnv.Desktop)

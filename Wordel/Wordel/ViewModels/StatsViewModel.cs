@@ -1,18 +1,69 @@
+using Wordel.Data;
+using Wordel.Util;
+
 namespace Wordel.ViewModels;
 
 public class StatsViewModel: ViewModelBase
 {
- /*
-<TextBlock Grid.Row="1" Grid.Column="0">Games Won:</TextBlock>
-<TextBlock Grid.Row="1" Grid.Column="1">31</TextBlock>
-<TextBlock Grid.Row="2" Grid.Column="0">Games Lost:</TextBlock>
-<TextBlock Grid.Row="2" Grid.Column="1">20</TextBlock>
-<TextBlock Grid.Row="3" Grid.Column="0">Total Games Played:</TextBlock>
-<TextBlock Grid.Row="3" Grid.Column="1">51</TextBlock>
+    private PlayStats? _stats;
 
-<TextBlock Grid.Row="5" Grid.Column="0">Longest Guessed Word:</TextBlock>
-<TextBlock Grid.Row="5" Grid.Column="1">5 letters</TextBlock>
-<TextBlock Grid.Row="6" Grid.Column="0">Quickest victory:</TextBlock>
-<TextBlock Grid.Row="6" Grid.Column="1">1 try</TextBlock>
-  */
+    public PlayStats Stats
+    {
+        get
+        {
+            _stats ??= Database.GetInstance().GetStats();
+            return (PlayStats) _stats;
+        }
+    }
+
+
+    public int Wins {
+        get => Stats.Wins;
+        
+    }
+    public int Loses {
+        get => Stats.Loses;
+        
+    }
+    public int Plays {
+        get => Stats.Plays;
+        
+    }
+    public string LongestGuess {
+        get => Stats.LongestGuess + " " + LocaleStorage.GetTranslation("Letters");
+        
+    }
+    public string QuickestVictory
+    {
+        get
+        {
+            if (Stats.QuickestVictory == 1)
+            {
+                return Stats.QuickestVictory + " " + LocaleStorage.GetTranslation("Try");
+            } else {
+                return Stats.QuickestVictory + " " + LocaleStorage.GetTranslation("Tries");
+            }
+        }
+    }
+    
+    public string ScreenTitle
+    {
+        get => LocaleStorage.GetTranslation("ScreenStats");
+    }
+    
+    public string StatWins {
+        get => LocaleStorage.GetTranslation("StatWins") + ":";
+    }
+    public string StatLoses {
+        get => LocaleStorage.GetTranslation("StatLoses") + ":";
+    }
+    public string StatTotal {
+        get => LocaleStorage.GetTranslation("StatTotal") + ":";
+    }
+    public string StatLongest {
+        get => LocaleStorage.GetTranslation("StatLongest") + ":";
+    }
+    public string StatQuickest {
+        get => LocaleStorage.GetTranslation("StatQuickest") + ":";
+    }
 }

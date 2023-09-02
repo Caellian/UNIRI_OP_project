@@ -6,5 +6,15 @@
   "MaxAnswersSettingsOption": "No. of tries:",
   "GameVictory": "Victory!",
   "GameFail": "You lose!",
-  "CorrectAnswer": "Correct answer"
+  "CorrectAnswer": "Correct answer",
+  "Letters": "letters",
+  "Try": "try",
+  "Tries": "tries",
+  "ScreenStats": "Stats",
+  "ScreenSettings": "Settings",
+  "StatWins": "Games Won",
+  "StatLoses": "Games Lost",
+  "StatTotal": "Total Games Played",
+  "StatLongest": "Longest Guessed Word",
+  "StatQuickest": "Quickest Victory"
 }

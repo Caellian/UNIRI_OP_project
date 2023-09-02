@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Wordel.Model;
 using Wordel.Util;
 using Wordel.ViewModels;
 using Wordel.Views;
@@ -22,15 +21,15 @@ public partial class App : Application
         switch (ApplicationLifetime)
         {
             case IClassicDesktopStyleApplicationLifetime desktop:
-                desktop.MainWindow = new MainWindowView
+                desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel()
+                    DataContext = new MainViewModel()
                 };
                 break;
             case ISingleViewApplicationLifetime singleViewPlatform:
-                singleViewPlatform.MainView = new MainWindowView
+                singleViewPlatform.MainView = new MainView
                 {
-                    DataContext = new MainWindowViewModel()
+                    DataContext = new MainViewModel()
                 };
                 break;
         }

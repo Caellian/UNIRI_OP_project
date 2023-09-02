@@ -6,5 +6,15 @@
   "MaxAnswersSettingsOption": "Br. pokušaja:",
   "GameVictory": "Pobjeda!",
   "GameFail": "Izgubili ste!",
-  "CorrectAnswer": "Točan odgovor"
+  "CorrectAnswer": "Točan odgovor",
+  "Letters": "slova",
+  "Try": "pokušaj",
+  "Tries": "pokušaja",
+  "ScreenStats": "Statistika",
+  "ScreenSettings": "Postavke",
+  "StatWins": "Br. pobjeda",
+  "StatLoses": "Br. gubitaka",
+  "StatTotal": "Ukupno odigrano",
+  "StatLongest": "Najdulja pogođena riječ",
+  "StatQuickest": "Najbrža pobjeda"
 }

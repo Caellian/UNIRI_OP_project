@@ -17,6 +17,11 @@ public class SettingsViewModel : ViewModelBase
         get => _settings;
         set => _settings = this.RaiseAndSetIfChanged(ref _settings, value);
     }
+
+    public string ScreenTitle
+    {
+        get => LocaleStorage.GetTranslation("ScreenSettings");
+    }
     
     public IEnumerable<(FieldInfo field, Configurable conf)> SettingFields => (
             from field in typeof(Settings).GetFields() select

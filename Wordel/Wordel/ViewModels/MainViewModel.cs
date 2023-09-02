@@ -3,12 +3,12 @@ using Wordel.Model;
 
 namespace Wordel.ViewModels;
 
-public class MainWindowViewModel: ViewModelBase
+public class MainViewModel: ViewModelBase
 {
     private ViewModelBase _content;
     private Settings _settings;
 
-    public MainWindowViewModel()
+    public MainViewModel()
     {
         _settings = new Settings();
         _content = new GameViewModel(_settings);

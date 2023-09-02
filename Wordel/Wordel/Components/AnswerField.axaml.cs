@@ -139,9 +139,9 @@ public partial class AnswerField : UserControl
         AvaloniaXamlLoader.Load(this);
     }
 
-    public ISolidColorBrush[] UseColors(LetterUse[] uses)
+    public ISolidColorBrush[] UseColors(LetterUse[] uses, int length)
     {
-        var result = new ISolidColorBrush[uses.Length];
+        var result = Enumerable.Repeat((ISolidColorBrush) Brushes.Transparent, length).ToArray();
         for (var i = 0; i < uses.Length; i++)
         {
             result[i] = uses[i] switch
@@ -157,16 +157,21 @@ public partial class AnswerField : UserControl
 
     public override void Render(DrawingContext context)
     {
-        var fill = UseColors(WordUtil.MatchInput(_correctAnswer, _currentAnswer));
+        var fill = UseColors(WordUtil.MatchInput(_correctAnswer, _currentAnswer), MaxLength);
         
         for (var i = 0; i < MaxLength; i++)
         {
             var pos = new Point(BorderThickness + i * (CellWidth + CellSpacing), BorderThickness);
 
-            context.DrawRectangle(fill[i], new Pen(BorderBrush, BorderThickness),
+            var pen = new Pen(BorderBrush, BorderThickness);
+            context.DrawRectangle(fill[i], pen,
                 new Rect(pos, new Size(CellWidth, CellHeight)), 4, 4);
+            
+            if (i >= _currentAnswer.Length)
+            {
+                continue;
+            }
 
-            if (i >= _currentAnswer.Length) continue;
             var answerLetter = _currentAnswer.ToCharArray().GetValue(i);
 
             var text = new FormattedText(answerLetter?.ToString() ?? "", CultureInfo.CurrentCulture, FlowDirection.LeftToRight,

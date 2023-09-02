@@ -14,7 +14,7 @@ public static class WordUtil
 {
     public static LetterUse[] MatchInput(string target, string current)
     {
-        var maxLength = target.Length;
+        var maxLength = current.Length;
         
         var result = new LetterUse[maxLength];
         for (var i = 0; i < maxLength; i++)

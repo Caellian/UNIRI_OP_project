@@ -13,8 +13,8 @@
     </Design.DataContext>
     <StackPanel Spacing="15">
         <Grid Height="50" ColumnDefinitions="*, Auto">
-            <TextPresenter Grid.Column="0" 
-                           Margin="5,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontWeight="ExtraBold" FontSize="25">Settings</TextPresenter>
+            <TextPresenter Name="TitlePresenter" Grid.Column="0" 
+                           Margin="5,0,0,0" VerticalAlignment="Center" TextAlignment="Left" FontWeight="ExtraBold" FontSize="25" Text="{Binding ScreenTitle}" />
             <components:IconButton Grid.Column="1" Icon="/Assets/icons/close.png" Click="Close_OnPointerReleased" />
         </Grid>
         <Grid x:Name="OptionsGrid"></Grid>

@@ -5,6 +5,7 @@ using Avalonia.Layout;
 using MessageBox.Avalonia.Enums;
 using ReactiveUI;
 using Wordel.Components;
+using Wordel.Data;
 using Wordel.Model;
 using Wordel.Util;
 
@@ -65,6 +66,7 @@ public class GameViewModel : ViewModelBase
     public void StartNewGame()
     {
         State.Reset();
+        Status = GameStatus.Play;
         this.RaisePropertyChanged(nameof(State));
     }
 
@@ -91,12 +93,26 @@ public class GameViewModel : ViewModelBase
 
     public void ConfirmAnswer()
     {
+        if (Status == GameStatus.Win)
+        {
+            StartNewGame();
+            return;
+        }
+        
         var current = State.Answers[State.CurrentTry];
         if (current.Length != State.Settings.WordLength) return;
+        
+        CurrentTry += 1;
         
         if (current == State.CorrectAnswer)
         {
             Status = GameStatus.Win;
+            Database.GetInstance().SavePlay(new PlayedGame
+            {
+                Word = State.CorrectAnswer,
+                Attempts = CurrentTry,
+                Victory = true
+            });
             return;
         }
             
@@ -107,12 +123,16 @@ public class GameViewModel : ViewModelBase
             dialog.Show();
             return;
         }
-            
-        CurrentTry += 1;
-
+        
         if (State.CurrentTry == State.Settings.MaxAnswers)
         {
             Status = GameStatus.Lose;
+            Database.GetInstance().SavePlay(new PlayedGame
+            {
+                Word = State.CorrectAnswer,
+                Attempts = CurrentTry,
+                Victory = false
+            });
         }
     }
 }

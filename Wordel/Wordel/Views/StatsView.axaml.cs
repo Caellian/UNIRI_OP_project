@@ -21,7 +21,7 @@ public partial class StatsView : UserControl
 
     private void Close_OnPointerReleased(object? sender, RoutedEventArgs routedEventArgs)
     {
-        var model = Parent?.DataContext as MainWindowViewModel;
+        var model = Parent?.DataContext as MainViewModel;
         model?.ToggleLeaderboard();
     }
 }

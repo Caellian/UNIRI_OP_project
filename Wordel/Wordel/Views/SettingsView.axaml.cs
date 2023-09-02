@@ -154,6 +154,7 @@ public partial class SettingsView : UserControl
                             var cbi = (ComboBoxItem) value.SelectedItem;
                             LocaleStorage.CurrentCulture = (CultureInfo?) cbi.Content;
                             field.SetValue(model.Settings, LocaleStorage.CurrentCulture?.Name);
+                            TitlePresenter.Text = model.ScreenTitle;
                             BuildOptions();
                         });
                     }
@@ -184,15 +185,15 @@ public partial class SettingsView : UserControl
         OptionsGrid.RowDefinitions = rowDefs;
     }
 
-    protected override void OnLoaded()
+    protected override void OnLoaded(RoutedEventArgs args)
     {
-        base.OnLoaded();
+        base.OnLoaded(args);
         BuildOptions();
     }
 
     private void Close_OnPointerReleased(object? sender, RoutedEventArgs routedEventArgs)
     {
-        var model = Parent?.DataContext as MainWindowViewModel;
+        var model = Parent?.DataContext as MainViewModel;
         model?.ToggleSettings();
     }
 }
