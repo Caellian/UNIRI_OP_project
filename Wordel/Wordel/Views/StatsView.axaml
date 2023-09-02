@@ -43,6 +43,7 @@
             <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding LongestGuess}" />
             <TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding StatQuickest}"/>
             <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding QuickestVictory}" />
+            <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding StoreDir}"/>
         </Grid>
     </Grid>
 </UserControl>

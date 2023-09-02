@@ -4,12 +4,12 @@
         <TargetFramework>net7.0-android</TargetFramework>
         <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
         <Nullable>enable</Nullable>
-        <ApplicationId>me.caellian.Wordel</ApplicationId>
+        <ApplicationId>net.tinsvagelj.Wordel</ApplicationId>
         <ApplicationVersion>1</ApplicationVersion>
         <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
         <AndroidPackageFormat>apk</AndroidPackageFormat>
         <AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
-        <PackageId>Wordel</PackageId>
+        <PackageId>Wordel.Android</PackageId>
         <Title>Wordel</Title>
         <Authors>Tin Švagelj</Authors>
     </PropertyGroup>
@@ -36,7 +36,7 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
-        <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.1" />
+        <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.2" />
     </ItemGroup>
 
     <ItemGroup>

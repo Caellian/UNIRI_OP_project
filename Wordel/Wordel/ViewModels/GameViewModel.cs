@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Avalonia.Controls;
-using Avalonia.Layout;
-using MessageBox.Avalonia.Enums;
+﻿using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 using ReactiveUI;
-using Wordel.Components;
 using Wordel.Data;
 using Wordel.Model;
 using Wordel.Util;
@@ -102,6 +98,15 @@ public class GameViewModel : ViewModelBase
         var current = State.Answers[State.CurrentTry];
         if (current.Length != State.Settings.WordLength) return;
         
+            
+        if (!LocaleStorage.CurrentLocale!.WordList.TestWord(current))
+        {
+            var dialog = MessageBoxManager.GetMessageBoxStandard(LocaleStorage.GetTranslation("UnknownWord"),
+                LocaleStorage.GetTranslation("InputNotInDict"), icon: Icon.Warning);
+            dialog.ShowAsync();
+            return;
+        }
+        
         CurrentTry += 1;
         
         if (current == State.CorrectAnswer)
@@ -115,24 +120,15 @@ public class GameViewModel : ViewModelBase
             });
             return;
         }
-            
-        if (!LocaleStorage.CurrentLocale!.WordList.TestWord(current))
-        {
-            var dialog = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxStandardWindow(LocaleStorage.GetTranslation("UnknownWord"),
-                LocaleStorage.GetTranslation("InputNotInDict"), icon: Icon.Warning);
-            dialog.Show();
-            return;
-        }
+
+        if (State.CurrentTry != State.Settings.MaxAnswers) return;
         
-        if (State.CurrentTry == State.Settings.MaxAnswers)
+        Status = GameStatus.Lose;
+        Database.GetInstance().SavePlay(new PlayedGame
         {
-            Status = GameStatus.Lose;
-            Database.GetInstance().SavePlay(new PlayedGame
-            {
-                Word = State.CorrectAnswer,
-                Attempts = CurrentTry,
-                Victory = false
-            });
-        }
+            Word = State.CorrectAnswer,
+            Attempts = CurrentTry,
+            Victory = false
+        });
     }
 }

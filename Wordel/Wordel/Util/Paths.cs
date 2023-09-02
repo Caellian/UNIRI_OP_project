@@ -7,12 +7,15 @@ public static class Paths
 {
     public static string StorageRoot()
     {
-        var path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        if (SysUtil.Environment == RunEnv.Desktop)
+        switch (SysUtil.Environment)
         {
-            path = Path.Combine(path, "Wordel");
+            case RunEnv.Desktop:
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Wordel");
+            case RunEnv.Android:
+                return "/data/data/net.tinsvagelj.Wordel";
+            default:
+                throw new SystemException("StorageRoot doesn't exist for environment");
         }
-        return path;
     }
 
     public static string AssetPath(string file)
@@ -26,6 +29,12 @@ public static class Paths
 
     public static string DBPath()
     {
-        return Path.Combine(StorageRoot(), "db.sqlite");
+        switch (SysUtil.Environment)
+        {
+            case RunEnv.Android:
+                return Path.Combine(StorageRoot(), "databases", "db.sqlite");
+            default:
+                return Path.Combine(StorageRoot(), "db.sqlite");
+        }
     }
 }
