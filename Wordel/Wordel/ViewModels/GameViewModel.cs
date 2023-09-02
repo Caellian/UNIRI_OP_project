@@ -89,7 +89,7 @@ public class GameViewModel : ViewModelBase
 
     public void ConfirmAnswer()
     {
-        if (Status == GameStatus.Win)
+        if (Status != GameStatus.Play)
         {
             StartNewGame();
             return;

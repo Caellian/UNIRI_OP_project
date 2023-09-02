@@ -26,24 +26,6 @@ public partial class AnswerField : UserControl
         set => SetAndRaise(MaxLengthProperty, ref _maxLength, value);
     }
 
-    public static readonly StyledProperty<double> CellWidthProperty =
-        AvaloniaProperty.Register<AnswerField, double>(nameof(CellWidth), 32.0);
-
-    public double CellWidth
-    {
-        get => GetValue(CellWidthProperty);
-        set => SetValue(CellWidthProperty, value);
-    }
-
-    public static readonly StyledProperty<double> CellHeightProperty =
-        AvaloniaProperty.Register<AnswerField, double>(nameof(CellHeight), 50);
-
-    public double CellHeight
-    {
-        get => GetValue(CellHeightProperty);
-        set => SetValue(CellHeightProperty, value);
-    }
-
     public static readonly StyledProperty<double> CellSpacingProperty =
         AvaloniaProperty.Register<AnswerField, double>(nameof(CellSpacing),8.0);
 
@@ -53,13 +35,14 @@ public partial class AnswerField : UserControl
         set => SetValue(CellSpacingProperty, value);
     }
 
-    public static readonly StyledProperty<ISolidColorBrush> BorderBrushProperty = AvaloniaProperty.Register<AnswerField, ISolidColorBrush>(
-        "BorderBrush");
-
-    public ISolidColorBrush BorderBrush
+    public double CellWidth
     {
-        get => GetValue(BorderBrushProperty);
-        set => SetValue(BorderBrushProperty, value);
+        get => GetValue(WidthProperty) / MaxLength - CellSpacing;
+    }
+
+    public double CellHeight
+    {
+        get => GetValue(HeightProperty) - BorderThickness * 2;
     }
 
     public static readonly StyledProperty<ISolidColorBrush> BackgroundCorrectProperty = AvaloniaProperty.Register<AnswerField, ISolidColorBrush>(
@@ -89,16 +72,16 @@ public partial class AnswerField : UserControl
         set => SetValue(BackgroundWrongProperty, value);
     }
 
-    public static readonly StyledProperty<double> BorderThicknessProperty =
+    public new static readonly StyledProperty<double> BorderThicknessProperty =
         AvaloniaProperty.Register<AnswerField, double>(nameof(BorderThickness), 2.0);
 
-    public double BorderThickness
+    public new double BorderThickness
     {
         get => GetValue(BorderThicknessProperty);
         set => SetValue(BorderThicknessProperty, value);
     }
 
-    public static readonly DirectProperty<AnswerField, string> CurrentAnswerProperty =
+    private static readonly DirectProperty<AnswerField, string> CurrentAnswerProperty =
         AvaloniaProperty.RegisterDirect<AnswerField, string>(
             nameof(CurrentAnswer),
             o => o.CurrentAnswer,
@@ -125,9 +108,6 @@ public partial class AnswerField : UserControl
         get => _correctAnswer;
         set => SetAndRaise(CorrectAnswerProperty, ref _correctAnswer, value);
     }
-
-    public double ContentWidth => MaxLength * (CellWidth + BorderThickness) + (MaxLength - 1) * CellSpacing;
-    public double ContentHeight => CellHeight + BorderThickness * 2.0;
 
     public AnswerField()
     {
@@ -175,7 +155,7 @@ public partial class AnswerField : UserControl
             var answerLetter = _currentAnswer.ToCharArray().GetValue(i);
 
             var text = new FormattedText(answerLetter?.ToString() ?? "", CultureInfo.CurrentCulture, FlowDirection.LeftToRight,
-                Typeface.Default, 22,
+                Typeface.Default, CellHeight / 2.0,
                 Brushes.WhiteSmoke);
             var textPos = new Point(pos.X + (CellWidth / 2.0) - (text.Width / 2.0),
                 pos.Y + (CellHeight / 2.0) - (text.Height / 2.0));

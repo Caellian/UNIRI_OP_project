@@ -11,38 +11,4 @@ public partial class MainView : UserControl
     {
         InitializeComponent();
     }
-
-    protected override void OnKeyDown(KeyEventArgs e)
-    {
-        base.OnKeyDown(e);
-        var content = (DataContext as MainViewModel)?.Content;
-        if (content is not GameViewModel model) return;
-        
-        // ReSharper disable once SwitchStatementHandlesSomeKnownEnumValuesWithDefault
-        switch (e.Key)
-        {
-            case Key.Enter:
-                if (model.State.CurrentTry < model.State.Settings.MaxAnswers)
-                {
-                    model.ConfirmAnswer();
-                }
-                else
-                {
-                    model.StartNewGame();
-                }
-                break;
-            case Key.Back:
-                model.RemoveLetter();
-                break;
-            default:
-            {
-                var entered = e.Key.ToString();
-                if (entered.Length == 1)
-                {
-                    model.EnterLetter(entered.ToLower()[0]);
-                }
-                break;
-            }
-        }
-    }
 }

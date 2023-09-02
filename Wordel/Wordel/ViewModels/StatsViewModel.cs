@@ -66,8 +66,4 @@ public class StatsViewModel: ViewModelBase
     public string StatQuickest {
         get => LocaleStorage.GetTranslation("StatQuickest") + ":";
     }
-    public string StoreDir
-    {
-        get => Paths.StorageRoot();
-    }
 }

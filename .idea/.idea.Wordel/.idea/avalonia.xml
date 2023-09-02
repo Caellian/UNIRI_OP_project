@@ -10,6 +10,7 @@
         <entry key="Wordel/Wordel/Components/AnswerField.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Components/AnswerRow.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Components/IconButton.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
+        <entry key="Wordel/Wordel/Components/Keyboard.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Components/LetterSpace.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Views/AnswerView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />
         <entry key="Wordel/Wordel/Views/GameView.axaml" value="Wordel/Wordel.Desktop/Wordel.Desktop.csproj" />

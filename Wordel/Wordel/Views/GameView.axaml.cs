@@ -22,19 +22,30 @@ public partial class GameView : UserControl
         InitializeComponent();
     }
 
-    private void RebuildLetterGrid(GameViewModel model)
+    private void RebuildLetterGrid()
     {
+        if (DataContext is not GameViewModel model) return;
+        
         var state = model.State;
         var maxAnswers = state?.Settings.MaxAnswers ?? 0;
-
-        var ans = new TextBox()
-        {
-            Text = state?.CorrectAnswer ?? "null"
-        };
-        
-        
         AnswerStackPanel.Children.Clear();
-        AnswerStackPanel.Children.Add(ans);
+        if (state == null) return;
+
+        #if DEBUG
+            var ans = new TextBox()
+            {
+                Text = state?.CorrectAnswer ?? "null"
+            };
+            AnswerStackPanel.Children.Add(ans);
+        #endif
+        
+        var rowWidth = ((ScrollViewer?) AnswerStackPanel.Parent)?.Bounds.Width ?? 440.0;
+        var cellWidth = rowWidth / state.Settings.WordLength;
+        if (cellWidth > 60.0)
+        {
+            cellWidth = 60.0;
+        }
+        var cellHeight = cellWidth * 1.2;
         
         for (var i = 0; i < maxAnswers; i++)
         {
@@ -43,32 +54,54 @@ public partial class GameView : UserControl
             {
                 CurrentAnswer = currentAnswer,
                 CorrectAnswer = i < state.CurrentTry ? state.CorrectAnswer : "",
-                MaxLength = state.Settings.WordLength
+                MaxLength = state.Settings.WordLength,
+                Width = cellWidth * state.Settings.WordLength,
+                Height = cellHeight,
             };
-            af.Width = af.ContentWidth; // TODO(tin): Setting AnswerField width manually
 
             AnswerStackPanel.Children.Add(af);
         }
     }
 
-    private void BuildKeyboard(GameViewModel model)
+    private void RebuildKeyboard()
     {
+        if (DataContext is not GameViewModel model) return;
+        
         KeyboardStackPanel.Children.Clear();
+        var rowWidth = ((Grid?) KeyboardStackPanel.Parent)?.Bounds.Width ?? 440.0;
         
         var rows = LocaleStorage.CurrentLocale!.Keyboard.lower;
+        var keySpacing = 8.0;
+        var keyWidth = rowWidth / rows[0].Length - (6.0 + keySpacing);
+        switch (keyWidth)
+        {
+            case > 50.0:
+                keySpacing = 9.0;
+                keyWidth = 50.0;
+                break;
+            case < 26.0:
+                keySpacing -= 4.0;
+                keyWidth += 4.0;
+                break;
+        }
+        var keyHeight = keyWidth * 1.15;
+        var fontSize = keyHeight * 0.5;
+
+        KeyboardStackPanel.Spacing = keySpacing;
+        
         foreach (var row in rows)
         {
             var currentRow = new StackPanel();
             currentRow.Orientation = Orientation.Horizontal;
-            currentRow.Spacing = 5;
+            currentRow.Spacing = keySpacing;
 
             if (KeyboardStackPanel.Children.Count != 2)
             {
-                currentRow.Margin = new Thickness(12.0 * KeyboardStackPanel.Children.Count, 0, 0, 0);
+                currentRow.Margin = new Thickness((keyWidth / 2.0) * KeyboardStackPanel.Children.Count, 0, 0, 0);
             }
             else
             {
-                currentRow.Margin = new Thickness(12.0 * KeyboardStackPanel.Children.Count - 25.0, 0, 0, 0);
+                currentRow.Margin = new Thickness((keyWidth / 2.0) * KeyboardStackPanel.Children.Count - keyWidth, 0, 0, 0);
             }
             
             if (KeyboardStackPanel.Children.Count == 2)
@@ -77,8 +110,10 @@ public partial class GameView : UserControl
                 {
                     Content = "⌫",
                     Command = ReactiveCommand.Create(model.RemoveLetter),
-                    Width = 45.0,
                     Padding = new Thickness(),
+                    Width = keyWidth * 2.0,
+                    Height = keyHeight,
+                        FontSize = fontSize,
                     IsEnabled = model.Status == GameStatus.Play
                 };
                 eraseButton.Classes.Add("keyboard");
@@ -96,6 +131,9 @@ public partial class GameView : UserControl
                         model.EnterLetter(letter);
                     }),
                     Padding = new Thickness(),
+                    Width = keyWidth,
+                    Height = keyHeight,
+                    FontSize = fontSize,
                 };
                 button.Classes.Add("keyboard");
                 currentRow.Children.Add(button);
@@ -107,9 +145,10 @@ public partial class GameView : UserControl
                 {
                     Content = model.Status == GameStatus.Play ? "↩" : "⟳",
                     Command = ReactiveCommand.Create(model.ConfirmAnswer),
-                    FontSize = 22.0,
-                    Width = 45.0,
                     Padding = new Thickness(),
+                    Width = keyWidth * 2.0,
+                    Height = keyHeight,
+                    FontSize = fontSize,
                 };
                 confirmButton.Classes.Add("keyboard");
                 confirmButton.Classes.Add("confirm");
@@ -193,7 +232,14 @@ public partial class GameView : UserControl
                 throw new ArgumentOutOfRangeException();
         }
     }
-    
+
+    protected override void OnSizeChanged(SizeChangedEventArgs e)
+    {
+        base.OnSizeChanged(e);
+        RebuildLetterGrid();
+        RebuildKeyboard();
+    }
+
     protected override void OnLoaded(RoutedEventArgs args)
     {
         base.OnLoaded(args);
@@ -206,20 +252,21 @@ public partial class GameView : UserControl
                 case "State":
                 case "CurrentAnswer":
                 case "CurrentTry":
-                    RebuildLetterGrid(ctx);
+                    RebuildLetterGrid();
                     MessageStackPanel.Children.Clear();
                     break;
                 case "Status":
-                    RebuildLetterGrid(ctx);
+                    RebuildLetterGrid();
                     ShowStatus(ctx);
+                    RebuildKeyboard();
                     break;
             }
         });
         
         if (ctx != null)
         {
-            RebuildLetterGrid(ctx);
-            BuildKeyboard(ctx);
+            RebuildLetterGrid();
+            RebuildKeyboard();
         }
     }
 
