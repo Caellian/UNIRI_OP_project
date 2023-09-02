@@ -10,7 +10,7 @@
 
         <Setter Property="Template">
             <ControlTemplate>
-                <Button Width="50" Height="50" x:Name="Button">
+                <Button Width="50" Height="50" x:Name="Button" Focusable="False">
                     <Image Width="35" Height="35" Source="{TemplateBinding Icon}" />
                 </Button>
             </ControlTemplate>
