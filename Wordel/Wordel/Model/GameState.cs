@@ -1,7 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Wordel.Util;
+#if DEBUG
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
+#endif
 
 namespace Wordel.Model;
 
@@ -24,6 +27,11 @@ public class GameState
     public void Reset()
     {
         CorrectAnswer = RandomWord(Settings.WordLength) ?? "";
+        #if DEBUG
+            var dialog = MessageBoxManager.GetMessageBoxStandard("Answer",
+                CorrectAnswer, icon: Icon.Info);
+            dialog.ShowAsync();
+        #endif
         Answers = new List<string>(Settings.MaxAnswers);
         CurrentTry = 0;
     }

@@ -6,7 +6,6 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
-using DynamicData;
 using ReactiveUI;
 using Wordel.Components;
 using Wordel.Model;
@@ -30,14 +29,6 @@ public partial class GameView : UserControl
         var maxAnswers = state?.Settings.MaxAnswers ?? 0;
         AnswerStackPanel.Children.Clear();
         if (state == null) return;
-
-        #if DEBUG
-            var ans = new TextBox()
-            {
-                Text = state?.CorrectAnswer ?? "null"
-            };
-            AnswerStackPanel.Children.Add(ans);
-        #endif
         
         var rowWidth = ((ScrollViewer?) AnswerStackPanel.Parent)?.Bounds.Width ?? 440.0;
         var cellWidth = rowWidth / state.Settings.WordLength;

@@ -45,16 +45,31 @@ public static class WordUtil
             
             if (target[i] == current[i])
             {
+                // is used correctly
                 remLet[letter] -= 1;
                 result[i] = LetterUse.Correct;
                 continue;
             }
 
-            if (remLet.GetValueOrDefault(letter) > 0)
+            var remUses = remLet.GetValueOrDefault(letter);
+            if (remUses > 0)
             {
-                remLet[letter] -= 1;
-                result[i] = LetterUse.Possible;
-                continue;
+                // could be used; check if used correctly later:
+                for (var j = i + 1; j < maxLength; j++)
+                {
+                    if (letter == current[j] && letter == target[j])
+                    {
+                        remUses -= 1;
+                    }
+                }
+
+                // if no correct uses:
+                if (remUses > 0)
+                {
+                    remLet[letter] -= 1;
+                    result[i] = LetterUse.Possible;
+                    continue;
+                }
             }
 
             result[i] = LetterUse.Wrong;
