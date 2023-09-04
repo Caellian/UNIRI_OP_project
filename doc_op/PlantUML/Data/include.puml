@@ -1,0 +1,4 @@
+@startuml
+!include ./Database.puml
+!include ./PlayedGame.puml
+@enduml

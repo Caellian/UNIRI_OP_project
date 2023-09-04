@@ -1,0 +1,11 @@
+@startuml
+enum LetterUse {
+    Unknown= 0,
+    Wrong= 1,
+    Possible= 2,
+    Correct= 3,
+}
+class WordUtil <<static>> {
+    + {static} MatchInput(target:string, current:string) : LetterUse[]
+}
+@enduml

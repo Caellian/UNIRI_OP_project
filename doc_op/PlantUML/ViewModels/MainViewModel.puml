@@ -1,0 +1,11 @@
+@startuml
+class MainViewModel {
+    + MainViewModel()
+    + ToggleSettings() : void
+    + ToggleLeaderboard() : void
+}
+ViewModelBase <|-- MainViewModel
+MainViewModel --> "_content" ViewModelBase
+MainViewModel --> "_settings" Settings
+MainViewModel --> "Content" ViewModelBase
+@enduml

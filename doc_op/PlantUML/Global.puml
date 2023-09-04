@@ -1,0 +1,7 @@
+@startuml
+!include ./Model/include.puml
+!include ./Data/include.puml
+!include ./Components/include.puml
+!include ./ViewModels/include.puml
+!include ./Views/include.puml
+@enduml

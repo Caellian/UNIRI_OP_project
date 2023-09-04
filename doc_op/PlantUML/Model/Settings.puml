@@ -1,0 +1,7 @@
+@startuml
+class Settings {
+    + Language : string
+    + WordLength : int = 5
+    + MaxAnswers : int = 5
+}
+@enduml

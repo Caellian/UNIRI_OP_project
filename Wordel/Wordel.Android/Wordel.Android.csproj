@@ -12,6 +12,8 @@
         <PackageId>Wordel.Android</PackageId>
         <Title>Wordel</Title>
         <Authors>Tin Švagelj</Authors>
+        <Product>Wordel</Product>
+        <AssemblyName>Wordel</AssemblyName>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
         <AndroidSupportedAbis>armeabi-v7a;x86;arm64-v8a;x86_64</AndroidSupportedAbis>

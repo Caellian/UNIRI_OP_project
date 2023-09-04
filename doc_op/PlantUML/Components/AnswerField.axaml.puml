@@ -1,0 +1,34 @@
+@startuml
+class AnswerField <<partial>> {
+    - _maxLength : int = 5
+    + MaxLength : int <<get>> <<set>>
+    + CellSpacing : double <<get>> <<set>>
+    + CellWidth : double <<get>>
+    + CellHeight : double <<get>>
+    + <<new>> BorderThickness : double <<get>> <<set>>
+    - _currentAnswer : string = ""
+    + CurrentAnswer : string <<get>> <<set>>
+    - _correctAnswer : string = ""
+    + CorrectAnswer : string <<get>> <<set>>
+    + AnswerField()
+    - InitializeComponent() : void
+    + UseColors(uses:LetterUse[], length:int) : ISolidColorBrush[]
+    + <<override>> Render(context:DrawingContext) : void
+}
+class "DirectProperty`2"<T1,T2> {
+}
+class "StyledProperty`1"<T> {
+}
+UserControl <|-- AnswerField
+AnswerField o-> "MaxLengthProperty<AnswerField,int>" "DirectProperty`2"
+AnswerField o-> "CellSpacingProperty<double>" "StyledProperty`1"
+AnswerField o-> "BackgroundCorrectProperty<ISolidColorBrush>" "StyledProperty`1"
+AnswerField --> "BackgroundCorrect" ISolidColorBrush
+AnswerField o-> "BackgroundPossibleProperty<ISolidColorBrush>" "StyledProperty`1"
+AnswerField --> "BackgroundPossible" ISolidColorBrush
+AnswerField o-> "BackgroundWrongProperty<ISolidColorBrush>" "StyledProperty`1"
+AnswerField --> "BackgroundWrong" ISolidColorBrush
+AnswerField o-> "BorderThicknessProperty<double>" "StyledProperty`1"
+AnswerField o-> "CurrentAnswerProperty<AnswerField,string>" "DirectProperty`2"
+AnswerField o-> "CorrectAnswerProperty<AnswerField,string>" "DirectProperty`2"
+@enduml

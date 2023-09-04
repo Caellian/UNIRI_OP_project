@@ -1,0 +1,8 @@
+@startuml
+!include ./Settings.puml
+!include ./GameState.puml
+!include ./PlayStats.puml
+!include ./GameStatus.puml
+!include ./Ranged.puml
+!include ./LetterUse.puml
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class StatsView <<partial>> {
+    + StatsView()
+    - InitializeComponent() : void
+    - Close_OnPointerReleased(sender:object?, routedEventArgs:RoutedEventArgs) : void
+}
+UserControl <|-- StatsView
+@enduml

@@ -1,0 +1,8 @@
+@startuml
+class PlayedGame {
+    + ID : int <<get>> <<set>> = 0
+    + Word : string <<get>> <<set>>
+    + Attempts : int <<get>> <<set>>
+    + Victory : bool <<get>> <<set>>
+}
+@enduml

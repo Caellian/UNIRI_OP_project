@@ -1,0 +1,6 @@
+@startuml
+class ViewModelBase {
+    + {static} GetString(key:string) : string
+}
+ReactiveObject <|-- ViewModelBase
+@enduml

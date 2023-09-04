@@ -75,7 +75,7 @@ public partial class GameView : UserControl
                 keyWidth += 4.0;
                 break;
         }
-        var keyHeight = keyWidth * 1.15;
+        var keyHeight = keyWidth * 1.3;
         var fontSize = keyHeight * 0.5;
 
         KeyboardStackPanel.Spacing = keySpacing;

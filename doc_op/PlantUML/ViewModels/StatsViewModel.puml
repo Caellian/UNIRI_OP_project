@@ -1,0 +1,18 @@
+@startuml
+class StatsViewModel {
+    - _stats : PlayStats?
+    + Wins : int <<get>>
+    + Loses : int <<get>>
+    + Plays : int <<get>>
+    + LongestGuess : string <<get>>
+    + QuickestVictory : string <<get>>
+    + ScreenTitle : string <<get>>
+    + StatWins : string <<get>>
+    + StatLoses : string <<get>>
+    + StatTotal : string <<get>>
+    + StatLongest : string <<get>>
+    + StatQuickest : string <<get>>
+}
+ViewModelBase <|-- StatsViewModel
+StatsViewModel --> "Stats" PlayStats
+@enduml

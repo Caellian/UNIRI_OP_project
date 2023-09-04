@@ -1,0 +1,12 @@
+@startuml
+class "Ranged`1"<T> {
+    + Min : T
+    + StartInclusive : bool = true
+    + Max : T
+    + EndInclusive : bool = false
+    + Ranged(min:T, max:T)
+    + Includes(value:T) : bool
+}
+class "IComparable`1"<T> {
+}
+@enduml

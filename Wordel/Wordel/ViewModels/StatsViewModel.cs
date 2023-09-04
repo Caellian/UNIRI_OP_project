@@ -16,23 +16,11 @@ public class StatsViewModel: ViewModelBase
         }
     }
 
-
-    public int Wins {
-        get => Stats.Wins;
-        
-    }
-    public int Loses {
-        get => Stats.Loses;
-        
-    }
-    public int Plays {
-        get => Stats.Plays;
-        
-    }
-    public string LongestGuess {
-        get => Stats.LongestGuess + " " + LocaleStorage.GetTranslation("Letters");
-        
-    }
+    public int Wins => Stats.Wins;
+    public int Loses => Stats.Loses;
+    public int Plays => Stats.Plays;
+    public string LongestGuess => Stats.LongestGuess + " " + LocaleStorage.GetTranslation("Letters");
+    
     public string QuickestVictory
     {
         get
@@ -46,24 +34,10 @@ public class StatsViewModel: ViewModelBase
         }
     }
     
-    public string ScreenTitle
-    {
-        get => LocaleStorage.GetTranslation("ScreenStats");
-    }
-    
-    public string StatWins {
-        get => LocaleStorage.GetTranslation("StatWins") + ":";
-    }
-    public string StatLoses {
-        get => LocaleStorage.GetTranslation("StatLoses") + ":";
-    }
-    public string StatTotal {
-        get => LocaleStorage.GetTranslation("StatTotal") + ":";
-    }
-    public string StatLongest {
-        get => LocaleStorage.GetTranslation("StatLongest") + ":";
-    }
-    public string StatQuickest {
-        get => LocaleStorage.GetTranslation("StatQuickest") + ":";
-    }
+    public string ScreenTitle => LocaleStorage.GetTranslation("ScreenStats");
+    public string StatWins => LocaleStorage.GetTranslation("StatWins") + ":";
+    public string StatLoses => LocaleStorage.GetTranslation("StatLoses") + ":";
+    public string StatTotal => LocaleStorage.GetTranslation("StatTotal") + ":";
+    public string StatLongest => LocaleStorage.GetTranslation("StatLongest") + ":";
+    public string StatQuickest => LocaleStorage.GetTranslation("StatQuickest") + ":";
 }

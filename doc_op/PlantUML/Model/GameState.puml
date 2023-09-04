@@ -1,0 +1,14 @@
+@startuml
+class GameState {
+    + CorrectAnswer : string
+    + CurrentTry : int
+    + GameState(settings:Settings)
+    + Reset() : void
+    + {static} RandomWord(length:int) : string?
+}
+class "List`1"<T> {
+}
+GameState --> "Settings" Settings
+GameState --> "Answers<string>" "List`1"
+GameState o-> "_rand" Random
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class Database {
+    - {static} _instance : Database? = null
+    + Database()
+    + {static} GetInstance() : Database
+    + GetStats() : PlayStats
+    + SavePlay(game:PlayedGame) : int
+}
+Database --> "_database" SQLiteConnection
+@enduml

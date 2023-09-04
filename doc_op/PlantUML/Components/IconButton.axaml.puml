@@ -1,0 +1,11 @@
+@startuml
+class IconButton {
+    + Icon : IImage? <<get>> <<set>>
+}
+class "StyledProperty`1"<T> {
+}
+class "EventHandler`1"<T> {
+}
+TemplatedControl <|-- IconButton
+IconButton o-> "IconProperty<IImage?>" "StyledProperty`1"
+@enduml

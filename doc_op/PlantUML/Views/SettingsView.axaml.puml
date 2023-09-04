@@ -1,0 +1,9 @@
+@startuml
+class SettingsView <<partial>> {
+    + SettingsView()
+    - BuildOptions() : void
+    # <<override>> OnLoaded(args:RoutedEventArgs) : void
+    - Close_OnPointerReleased(sender:object?, routedEventArgs:RoutedEventArgs) : void
+}
+UserControl <|-- SettingsView
+@enduml

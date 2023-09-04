@@ -63,7 +63,7 @@ public class TextMatchingTest
         Assert.Equal(LetterUse.Wrong, result[3]);
         Assert.Equal(LetterUse.Wrong, result[4]);
         Assert.Equal(LetterUse.Wrong, result[5]);
-        Assert.Equal(LetterUse.Correct, result[5]);
-        Assert.Equal(LetterUse.Wrong, result[6]);
+        Assert.Equal(LetterUse.Correct, result[6]);
+        Assert.Equal(LetterUse.Wrong, result[7]);
     }
 }

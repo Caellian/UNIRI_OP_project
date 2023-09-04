@@ -29,7 +29,7 @@
         <StackPanel Grid.Row="2" x:Name="MessageStackPanel" Spacing="5">
         </StackPanel>
         
-        <StackPanel Grid.Row="3" x:Name="KeyboardStackPanel" Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" Margin="0, 15">
+        <StackPanel Grid.Row="3" x:Name="KeyboardStackPanel" Orientation="Vertical" Spacing="10" HorizontalAlignment="Center" Margin="0, 15, 0, 30">
         </StackPanel>
     </Grid>
 </UserControl>

@@ -1,0 +1,9 @@
+@startuml
+class PlayStats <<struct>> {
+    + Wins : int
+    + Loses : int
+    + Plays : int
+    + LongestGuess : int
+    + QuickestVictory : int
+}
+@enduml

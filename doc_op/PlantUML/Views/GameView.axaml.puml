@@ -1,0 +1,15 @@
+@startuml
+class GameView <<partial>> {
+    + GameView()
+    - RebuildLetterGrid() : void
+    - RebuildKeyboard() : void
+    # <<override>> OnKeyDown(e:KeyEventArgs) : void
+    - ShowStatus(model:GameViewModel) : void
+    # <<override>> OnSizeChanged(e:SizeChangedEventArgs) : void
+    # <<override>> OnLoaded(args:RoutedEventArgs) : void
+    - NewGame_OnPointerReleased(sender:object?, routedEventArgs:RoutedEventArgs) : void
+    - Settings_OnPointerReleased(sender:object?, routedEventArgs:RoutedEventArgs) : void
+    - Leaderboard_OnPointerReleased(sender:object?, routedEventArgs:RoutedEventArgs) : void
+}
+UserControl <|-- GameView
+@enduml

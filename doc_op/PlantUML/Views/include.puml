@@ -1,0 +1,7 @@
+@startuml
+!include ./MainWindow.axaml.puml
+!include ./SettingsView.axaml.puml
+!include ./GameView.axaml.puml
+!include ./StatsView.axaml.puml
+!include ./MainView.axaml.puml
+@enduml
